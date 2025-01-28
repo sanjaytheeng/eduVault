@@ -10,6 +10,15 @@
         <field name="target">inline</field>
         <field name="context">{'module' : 'eduvault_core'}</field>
     </record>
+
+    <!-- Action -->
+    <record id="action_parent" model="ir.actions.act_window">
+        <field name="name">Parent</field>
+        <field name="res_model">op.parent</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
     <!-- eduvault Menu -->
     <menuitem id="menu_op_school_root"
               name="SIS"
@@ -41,6 +50,12 @@
               name="Configuration"
               parent="menu_op_school_root"
               sequence="50"/>
+
+    <menuitem id="menu_op_parent_list" 
+              name="Parent List" 
+              parent="menu_op_school_config" 
+              action="action_parent" 
+              sequence="2"/>
 
     <menuitem id="menu_op_school_config_course"
               name="Course Management"
@@ -90,6 +105,19 @@
               parent="menu_op_school_config_general"
               sequence="40"
               action="act_open_op_category_view"
+              groups="eduvault_core.group_op_back_office_admin"/>
+            
+    <menuitem id="menu_op_category_medium"
+              name="Medium"
+              parent="menu_op_school_config_general"
+              sequence="40"
+              action="act_open_op_medium_view"
+              groups="eduvault_core.group_op_back_office_admin"/>
+    <menuitem id="menu_op_category_medium"
+              name="Medium"
+              parent="menu_op_school_config_general"
+              sequence="40"
+              action="act_open_op_medium_view"
               groups="eduvault_core.group_op_back_office_admin"/>
 
     <!-- Activity Root -->

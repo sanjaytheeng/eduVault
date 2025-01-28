@@ -74,6 +74,18 @@
                 </list>
             </field>
         </record>
+        <record id="view_op_parent_tree" model="ir.ui.view">
+            <field name="name">op.parent.list</field>
+            <field name="model">op.parent</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Parent">
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                </list>
+            </field>
+        </record>
 
         <record id="view_op_student_form" model="ir.ui.view">
             <field name="name">op.student.form</field>
@@ -100,9 +112,6 @@
                             </div>
                             <div class="mb16 col-8 col-lg-10 px-0">
                                 <div class="row">
-                                    <h2 class="col-12 col-lg-2">
-                                        <field name="title" placeholder="Title"/>
-                                    </h2>
                                     <h2 class="col-12 col-lg-10">
                                         <field name="name" placeholder="Name" required="1" invisible="1"/>
                                         <table>
@@ -123,19 +132,28 @@
                             </div>
                         </div>
                         <notebook colspan="4">
+                            <page name="admission_information" string="Admission Information">
+                                <group name="admission_details">
+                                    <group>
+                                        <field name="academic_year_id"/>
+                                        <field name="admission_date"/>
+                                        <field name="course_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="medium_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook colspan="4">
                             <page name="personal_information" string="Personal Information">
                                 <group name="personal_detail">
                                     <group>
                                         <field name="gender" required="1"/>
                                         <field name="birth_date"/>
-                                        <label for="type"/>
-                                        <div name="div_type">
-                                            <field class="oe_inline" name="type"/>
-                                        </div>
                                         <label for="street" string="Address"/>
                                         <div name="o_address_format">
                                             <field name="street" placeholder="Street..."/>
-                                            <field name="street2" placeholder="Street2"/>
                                             <div class="address_format">
                                                 <field name="city" placeholder="City" style="width: 40%"/>
                                                 <field name="state_id" class="oe_no_button" placeholder="State"
@@ -154,11 +172,26 @@
                                         <field name="lang"/>
                                         <field name="blood_group"/>
                                         <field name="nationality"/>
-                                        <field name="visa_info"/>
                                         <field name="category_id"/>
                                         <field name="user_id" string="User" readonly="1"/>
                                         <field name="partner_id" placeholder="Partner" required="0"/>
                                     </group>
+                                    <separator string="miscellaneous" colspan="2"/>
+                                        <group colspan="3">
+                                            <field name="gr_no"/>
+                                        </group>
+                                </group>
+                            </page>
+                            <page name="family_information" string="Family Information">
+                                <group name="family_detail">
+                                    <field name="parent_ids">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="relation"/>
+                                            <field name="phone"/>
+                                            <field name="email"/>
+                                        </list>
+                                    </field>
                                     <separator string="miscellaneous" colspan="2"/>
                                         <group colspan="3">
                                             <field name="gr_no"/>

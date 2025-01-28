@@ -51,6 +51,11 @@ class OpStudent(models.Model):
     first_name = fields.Char('First Name',  translate=True)
     middle_name = fields.Char('Middle Name', translate=True)
     last_name = fields.Char('Last Name', translate=True)
+
+    admission_date = fields.Date(default = fields.Date.today)
+    academic_year_id = fields.Many2one('op.academic.year', string="Academic Year")
+    course_id = fields.Many2one('op.course', string="Courses", required=True)
+    medium_id = fields.Many2one('op.medium', string="Mediums")
     birth_date = fields.Date('Birth Date')
     blood_group = fields.Selection([
         ('A+', 'A+ve'),
@@ -73,6 +78,7 @@ class OpStudent(models.Model):
     id_number = fields.Char('ID Card Number', size=64)
     partner_id = fields.Many2one('res.partner', 'Partner',
                                  required=True, ondelete="cascade")
+    parent_ids = fields.One2many('op.parent','student_id', string="Parent")
     user_id = fields.Many2one('res.users', 'User', ondelete="cascade")
     gr_no = fields.Char("Registration Number", size=20)
     category_id = fields.Many2one('op.category', 'Category')

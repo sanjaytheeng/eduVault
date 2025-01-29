@@ -54,6 +54,7 @@
             </field>
         </record>
 
+ <!-- List View -->
         <record id="view_op_student_tree" model="ir.ui.view">
             <field name="name">op.student.list</field>
             <field name="model">op.student</field>
@@ -87,6 +88,7 @@
             </field>
         </record>
 
+<!-- Form View -->
         <record id="view_op_student_form" model="ir.ui.view">
             <field name="name">op.student.form</field>
             <field name="model">op.student</field>
@@ -108,7 +110,7 @@
                                 invisible ="active == True"/>
                         <div style="width:100%;" class="row align-items-center">
                             <div class="col-4 col-lg-2" style="text-align-last: center;">
-                                <field name="image_1920" widget="image" class="oe_left oe_avatar" style="margin-right: 30px !important;"/>
+                                <field name="image_1920" widget="image" class="oe_left oe_avatar" style="margin-right: 30px !important;"/> 
                             </div>
                             <div class="mb16 col-8 col-lg-10 px-0">
                                 <div class="row">

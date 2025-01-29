@@ -5,9 +5,10 @@
             <field name="name">Student Kanban</field>
             <field name="model">op.student</field>
             <field name="arch" type="xml">
-                <kanban class="o_res_partner_kanban">
+                <kanban class="o_res_partner_kanban" group_by ="course_id">
                     <field name="id"/>
                     <field name="image_1920"/>
+                    <progressbar field="course_id" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click o_res_partner_kanban">
@@ -96,11 +97,22 @@
             <field name="arch" type="xml">
                 <form string="Student">
                     <header>
+                        <button type="object" name="send_for_verification"
+                                string="Send for Verification"
+                                class="oe_highlight"
+                                groups="eduvault_core.group_op_back_office_admin"
+                                invisible ="user_id != False"/>
                         <button type="object" name="create_student_user"
                                 string="Create Student User"
                                 class="oe_highlight"
                                 groups="eduvault_core.group_op_back_office_admin"
                                 invisible ="user_id != False"/>
+                            <button type="object" name="terminate"
+                                string="Terminate"
+                                class="oe_highlight"
+                                groups="eduvault_core.group_op_back_office_admin"
+                                invisible ="user_id != False"/>    
+                        <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
                         <div name="button_box" class="oe_button_box">
@@ -153,6 +165,7 @@
                                     <group>
                                         <field name="gender" required="1"/>
                                         <field name="birth_date"/>
+                                        <field name="mother_tongue"/>
                                         <label for="street" string="Address"/>
                                         <div name="o_address_format">
                                             <field name="street" placeholder="Street..."/>
@@ -194,10 +207,14 @@
                                             <field name="email"/>
                                         </list>
                                     </field>
-                                    <separator string="miscellaneous" colspan="2"/>
-                                        <group colspan="3">
-                                            <field name="gr_no"/>
-                                        </group>
+                                </group>
+                            </page>
+                             <page name="document_information" string="Documents">
+                                <group name="documents">
+                                    <group>
+                                        <field name="doc_type"/>
+                                        <field name="doc_file"/>
+                                    </group>
                                 </group>
                             </page>
                         </notebook>

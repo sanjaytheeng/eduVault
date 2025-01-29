@@ -33,3 +33,4 @@ access_op_academic_year_back_office_admin,access_op_academic_year_back_office_ad
 access_op_academic_year_faculty,access_op_academic_year_faculty,model_op_academic_year,eduvault_core.group_op_faculty,1,0,0,0
 eduvault_core.access_op_medium,access_op_medium,eduvault_core.model_op_medium,base.group_user,1,1,1,1
 eduvault_core.access_op_parent,access_op_parent,eduvault_core.model_op_parent,base.group_user,1,1,1,1
+eduvault_core.access_op_documents,access_op_documents,eduvault_core.model_op_documents,base.group_user,1,1,1,1

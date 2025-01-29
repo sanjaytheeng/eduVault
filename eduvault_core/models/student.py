@@ -51,6 +51,15 @@ class OpStudent(models.Model):
     first_name = fields.Char('First Name',  translate=True)
     middle_name = fields.Char('Middle Name', translate=True)
     last_name = fields.Char('Last Name', translate=True)
+    mother_tongue = fields.Char('Mother Tongue')
+
+    state= fields.Selection([
+        ('new', 'New'),
+        ('approved', 'Approved'),
+        ('done', 'Done'),
+        ('terminate', 'Terminate')
+    ], default='new', string="Status")
+
 
     admission_date = fields.Date(default = fields.Date.today)
     academic_year_id = fields.Many2one('op.academic.year', string="Academic Year")
@@ -78,6 +87,8 @@ class OpStudent(models.Model):
     id_number = fields.Char('ID Card Number', size=64)
     partner_id = fields.Many2one('res.partner', 'Partner',
                                  required=True, ondelete="cascade")
+    doc_type = fields.Many2one('op.documents')    
+    doc_file = fields.Binary(string="Upload document")
     parent_ids = fields.One2many('op.parent','student_id', string="Parent")
     user_id = fields.Many2one('res.users', 'User', ondelete="cascade")
     gr_no = fields.Char("Registration Number", size=20)
@@ -92,6 +103,8 @@ class OpStudent(models.Model):
         'unique(gr_no)',
         'Registration Number must be unique per student!'
     )]
+
+    
 
     @api.onchange('first_name', 'middle_name', 'last_name')
     def _onchange_name(self):
@@ -117,6 +130,14 @@ class OpStudent(models.Model):
             'template': '/eduvault_core/static/xls/op_student.xls'
         }]
 
+    def send_for_verification(self):
+        for record in self:
+            record.state='approved'
+    
+    def terminate(self):
+        for record in self:
+            record.state='terminate'
+            
     def create_student_user(self):
         user_group = self.env.ref("base.group_portal") or False
         users_res = self.env['res.users']
@@ -131,3 +152,14 @@ class OpStudent(models.Model):
                     'tz': self._context.get('tz'),
                 })
                 record.user_id = user_id
+
+class OpDocuments(models.Model):
+    _name = "op.documents"
+    _description = "documents of students"
+
+    doc_type = fields.Selection([
+        ('slc', 'SLC'),
+        ('plus_two', '+2'),
+        ('bachelors', 'Bachelors')
+    ], 
+    string = "Document Type")

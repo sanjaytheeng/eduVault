@@ -7,7 +7,7 @@ from odoo.exceptions import ValidationError
 class OpBatch(models.Model):
     _name = "op.batch"
     _inherit = "mail.thread"
-    _description = "eduvault Batch"
+    _description = "eduvault Semesters"
 
     code = fields.Char('Code', size=16, required=True)
     name = fields.Char('Name', size=32, required=True)

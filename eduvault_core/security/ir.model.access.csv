@@ -34,3 +34,11 @@ access_op_academic_year_faculty,access_op_academic_year_faculty,model_op_academi
 eduvault_core.access_op_medium,access_op_medium,eduvault_core.model_op_medium,base.group_user,1,1,1,1
 eduvault_core.access_op_parent,access_op_parent,eduvault_core.model_op_parent,base.group_user,1,1,1,1
 eduvault_core.access_op_documents,access_op_documents,eduvault_core.model_op_documents,base.group_user,1,1,1,1
+eduvault_core.access_op_assignments,access_op_assignments,eduvault_core.model_op_assignments,base.group_user,1,1,1,1
+eduvault_core.access_op_assignment_lines,access_op_assignment_lines,eduvault_core.model_op_assignment_lines,base.group_user,1,1,1,1
+
+
+
+
+
+

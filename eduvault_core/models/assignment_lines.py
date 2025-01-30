@@ -3,8 +3,6 @@ from odoo import fields, api, models, _
 class OpAssignmentLines(models.Model):
     _name="op.assignment.lines"
     _description="These right here are some assignment lines"
-    _inherit = ['mail.thread', 'mail.activity.mixin']
-    _order = 'id desc'
     
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')

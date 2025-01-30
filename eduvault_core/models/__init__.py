@@ -15,3 +15,5 @@ from . import op_academic_term
 from . import op_academic_year
 from . import medium
 from . import parent
+from . import assignments
+from . import assignment_lines

@@ -10,7 +10,6 @@ class OpAssignment(models.Model):
     start_date = fields.Datetime(string='Assign Date',default= fields.Datetime.now, required=True)
     end_date = fields.Datetime(string='Submit By', default=lambda self: fields.Datetime.now() + timedelta(days=2), required=True)
     course_id = fields.Many2one('op.course', string='Course', required=True)
-    employee_id = fields.Many2one('hr.employee', string="Teacher", help="Name of the teacher who gave this assignment")
     batch_id = fields.Many2one('op.batch', string="Batch", help="Batch to assign thje assignment to")
     subject_id = fields.Many2one('op.subject', string='Subject', required=True)
     faculty_id = fields.Many2one('op.faculty', required=True, string="Teacher", help="Name of the teacher who gave this assignment")

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="act_open_op_fee_register">
+            <field name="name">Fee Register</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.fee.register</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        
+<!-- List View -->
+        <record id="view_op_fee_register_tree" model="ir.ui.view">
+            <field name="name">op.fee.register.list</field>
+            <field name="model">op.fee.register</field>
+            <field name="arch" type="xml">
+                <list string="Fees">
+                    <field name="name"/>
+                    <field name="batches"/>
+                    <field name="courses"/>
+                </list>
+            </field>
+        </record>
+
+<!-- Form View -->
+        <record id="view_op_fee_register_form" model="ir.ui.view">
+            <field name="name">op.fee.register.form</field>
+            <field name="model">op.fee.register</field>
+            <field name="arch" type="xml">
+                <form string="Fee Register">
+                    <sheet>
+                        <group name="feeregister">
+                            <separator string="INFORMATION" colspan="4"/>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                </group>
+                                <group>
+                                    <field name="batches"/>
+                                    <field name="courses"/>
+                                </group>
+                            <separator string="FEE STRUCTURES" colspan="4"/>
+                                <group>
+                                    <field name="fee_structures"/>
+                                </group>
+                                <group>
+                                    <field name="journal"/>
+                                </group>
+                        </group>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

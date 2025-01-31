@@ -36,7 +36,7 @@ eduvault_core.access_op_parent,access_op_parent,eduvault_core.model_op_parent,ba
 eduvault_core.access_op_documents,access_op_documents,eduvault_core.model_op_documents,base.group_user,1,1,1,1
 eduvault_core.access_op_assignments,access_op_assignments,eduvault_core.model_op_assignments,base.group_user,1,1,1,1
 eduvault_core.access_op_assignment_lines,access_op_assignment_lines,eduvault_core.model_op_assignment_lines,base.group_user,1,1,1,1
-
+eduvault_core.access_op_fee_register,access_op_fee_register,eduvault_core.model_op_fee_register,base.group_user,1,1,1,1
 
 
 

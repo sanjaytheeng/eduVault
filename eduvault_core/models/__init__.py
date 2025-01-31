@@ -17,3 +17,4 @@ from . import medium
 from . import parent
 from . import assignments
 from . import assignment_lines
+from . import fee_register

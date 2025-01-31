@@ -26,12 +26,23 @@
               web_icon="eduvault_core,static/description/sis.png"
               groups="group_op_back_office_admin"/>
 
-    <menuitem id="menu_op_school_main"
+    <menuitem id="menu_student"
               name="Students"
               parent="menu_op_school_root"
+              sequence="5"/>
+    <menuitem id="menu_op_school_main"
+              name="Students"
+              parent="menu_student"
               sequence="10"
               action="act_open_op_student_view"
               groups="group_op_faculty"/>
+        
+    <menuitem id="menu_op_fee_register"
+            name="Fee Register"
+            parent="menu_student"
+            sequence="15"
+            action="act_open_op_fee_register"
+            groups="group_op_faculty"/>
 
     <menuitem id="menu_op_faculty_main"
               name="Faculties"

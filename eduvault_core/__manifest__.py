@@ -36,6 +36,7 @@
         'views/student_portal_view.xml',
         'views/student_course_view.xml',
         'views/op_academic_year_view.xml',
+        'views/fee_register.xml',
         'views/op_academic_term_view.xml',
         'views/assignments_view.xml',
         'data/ir_cron_data.xml',

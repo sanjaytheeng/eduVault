@@ -30,6 +30,7 @@
               name="Students"
               parent="menu_op_school_root"
               sequence="5"/>
+
     <menuitem id="menu_op_school_main"
               name="Students"
               parent="menu_student"
@@ -124,7 +125,7 @@
               sequence="40"
               action="act_open_op_category_view"
               groups="eduvault_core.group_op_back_office_admin"/>
-            
+
     <menuitem id="menu_op_category_medium"
               name="Medium"
               parent="menu_op_school_config_general"

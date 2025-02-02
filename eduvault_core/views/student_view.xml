@@ -61,8 +61,7 @@
             <field name="model">op.student</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <list string="Student">
-                    <field name="title" optional="show"/>
+                <list string="Parent">
                     <field name="name"/>
                     <field name="gender" optional="hide"/>
                     <field name="birth_date" optional="hide"/>

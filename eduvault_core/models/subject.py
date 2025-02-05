@@ -24,6 +24,8 @@ class OpSubject(models.Model):
         self.env.user.dept_id and self.env.user.dept_id.id or False)
     active = fields.Boolean(default=True)
 
+    assignments = fields.One2many('op.assignments', 'subject_id', 'Assignments')
+
     _sql_constraints = [
         ('unique_subject_code',
          'unique(code)', 'Code should be unique per subject!'),

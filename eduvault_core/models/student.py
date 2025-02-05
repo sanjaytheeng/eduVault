@@ -55,7 +55,6 @@ class OpStudent(models.Model):
 
     state= fields.Selection([
         ('new', 'New'),
-        ('approved', 'Approved'),
         ('done', 'Done'),
         ('terminate', 'Terminate')
     ], default='new', string="Status")
@@ -104,6 +103,8 @@ class OpStudent(models.Model):
         'Registration Number must be unique per student!'
     )]
 
+    user_id = fields.Many2one('res.users', 'User', ondelete="cascade")
+
     
 
     @api.onchange('first_name', 'middle_name', 'last_name')
@@ -129,29 +130,14 @@ class OpStudent(models.Model):
             'label': _('Import Template for Students'),
             'template': '/eduvault_core/static/xls/op_student.xls'
         }]
-
-    def send_for_verification(self):
-        for record in self:
-            record.state='approved'
     
     def terminate(self):
         for record in self:
             record.state='terminate'
             
     def create_student_user(self):
-        user_group = self.env.ref("base.group_portal") or False
-        users_res = self.env['res.users']
         for record in self:
-            if not record.user_id:
-                user_id = users_res.create({
-                    'name': record.name,
-                    'partner_id': record.partner_id.id,
-                    'login': record.email,
-                    'groups_id': user_group,
-                    'is_student': True,
-                    'tz': self._context.get('tz'),
-                })
-                record.user_id = user_id
+            record.state="done"
 
 class OpDocuments(models.Model):
     _name = "op.documents"

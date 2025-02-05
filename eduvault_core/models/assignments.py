@@ -21,10 +21,19 @@ class OpAssignment(models.Model):
     ], string='State', index=True, readonly=True, default='draft', track_visibility='onchange')
     attachment = fields.Binary()
     total_assignment = fields.Integer(string='Total Assignment', compute='_compute_assignment')
-    total_submitted = fields.Integer(string='Total Submitted', compute='_compute_assignment')
-    total_not_submitted = fields.Integer(string='Total Not Submitted', compute='_compute_assignment')
+    total_submitted = fields.Integer(string='Total Submitted', compute='_compute__submitted')
+    total_not_submitted = fields.Integer(string='Total Not Submitted', compute='_compute_not_submitted')
 
 
+    assignment_line_ids = fields.One2many('op.assignment.lines', 'assignment_id', string='Assignment Lines')
+    def _compute_assignment(self):
+        for record in self:
+            record.total_assignment = len(record.assignment_line_ids)
+            record.total_submitted = len(record.assignment_line_ids.filtered(lambda l: l.state == 'submit'))
+            record.total_not_submitted = len(record.assignment_line_ids.filtered(lambda l: l.state == 'draft'))
+    def _compute_not_submitted(self):
+        for record in self:
+            record.total_not_submitted =  len(record.assignment_line_ids.filtered(lambda l: l.state == 'draft'))
     def _compute_submitted(self):
         for record in self:
             record.total_submitted =  len(record.assignment_line_ids.filtered(lambda l: l.state == 'submit'))

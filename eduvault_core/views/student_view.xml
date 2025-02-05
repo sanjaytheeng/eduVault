@@ -24,6 +24,7 @@
                                         </t>
                                     </div>
                                     <div class="oe_kanban_details">
+                                        <widget name="web_ribbon" title="Student" bg_color="text-bg-success" invisible="state != 'done'"/>
                                         <h4>
                                             <field name="name" />
                                         </h4>
@@ -96,29 +97,26 @@
             <field name="arch" type="xml">
                 <form string="Student">
                     <header>
-                        <button type="object" name="send_for_verification"
-                                string="Send for Verification"
-                                class="oe_highlight"
-                                groups="eduvault_core.group_op_back_office_admin"
-                                invisible ="user_id != False"/>
                         <button type="object" name="create_student_user"
                                 string="Create Student User"
                                 class="oe_highlight"
                                 groups="eduvault_core.group_op_back_office_admin"
                                 invisible ="user_id != False"/>
-                            <button type="object" name="terminate"
-                                string="Terminate"
-                                class="oe_highlight"
-                                groups="eduvault_core.group_op_back_office_admin"
-                                invisible ="user_id != False"/>    
+                        <button type="object" name="terminate"
+                            string="Terminate"
+                            class="oe_highlight"
+                            groups="eduvault_core.group_op_back_office_admin"
+                            invisible ="user_id != False"/>    
+
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
                         <div name="button_box" class="oe_button_box">
                         </div>
                         <field name="active" invisible="1"/>
-                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
-                                invisible ="active == True"/>
+                        <!-- <div class="oe_button_box" name="button_box"/> -->
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="state != 'terminate'"/>
+                        <widget name="web_ribbon" title="Student" bg_color="text-bg-success" invisible="state != 'done'"/>
                         <div style="width:100%;" class="row align-items-center">
                             <div class="col-4 col-lg-2" style="text-align-last: center;">
                                 <field name="image_1920" widget="image" class="oe_left oe_avatar" style="margin-right: 30px !important;"/> 
@@ -189,6 +187,7 @@
                                         <field name="category_id"/>
                                         <field name="user_id" string="User" readonly="1"/>
                                         <field name="partner_id" placeholder="Partner" required="0"/>
+                                        <field name="user_id" required="0"/>
                                     </group>
                                     <separator string="miscellaneous" colspan="2"/>
                                         <group colspan="3">
@@ -230,6 +229,7 @@
             <field name="arch" type="xml">
                 <search string="Student">
                     <field name="name"/>
+                    <field name="state"/>
                     <field name="blood_group"/>
                     <newline/>
                     <group expand="0" string="Group By...">
@@ -240,7 +240,9 @@
                         <filter name="language" string="Language"
                                 domain="[]" context="{'group_by':'lang'}"/>
                         <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
-                    </group>
+                        <filter name="state" string="Students" domain="[]" context="{'group_by':'state'}"/>   
+                        <filter string="Student" name="state" domain="[('state', '=', 'done')]"/>                  
+                        </group>
                 </search>
             </field>
         </record>

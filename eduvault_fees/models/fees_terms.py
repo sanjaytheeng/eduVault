@@ -1,5 +1,4 @@
 
-
 from odoo import models, api, fields, exceptions, _
 
 

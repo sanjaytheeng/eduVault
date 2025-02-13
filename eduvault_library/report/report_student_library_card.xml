@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Report Template for Library Card -->
+        <template id="report_student_library_card">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <!-- Library Card Container -->
+                            <div style="max-width: 450px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: #fff;">
+                                <!-- Card Header -->
+                                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                    <img class="company-logo"
+                                         t-att-src="image_data_uri(res_company.logo)"
+                                         alt="Library Logo"
+                                         style="max-width: 50px; margin-right: 10px;"/>
+                                    <div style="font-size: 18px; font-weight: 600;">
+                                        <p style="font-size: 20px; font-weight: bold; margin-bottom: 5px;">Library Card</p>
+                                        <p style="font-size: 14px; color: #3087c3;" t-out="res_company.partner_id.name or ''"/>
+                                    </div>
+                                </div>
+
+                                <!-- Header Divider -->
+                                <hr style="border: none; height: 2px; background-color: #2d4383; margin: 10px 0;"/>
+
+                                <!-- Card Content -->
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                                    <!-- Student Image -->
+                                    <div style="max-width: 120px; max-height: 150px; margin-right: 15px;">
+                                        <img t-if="o.image_1920"
+                                             t-att-src="image_data_uri(o.image_1920)"
+                                             class="student-photo" alt="Student Photo"
+                                             style="width: 100%; height: auto; border-radius: 5px; border: 1px solid #ccc;"/>
+                                        <img t-if="not o.image_1920"
+                                             src="/path/to/default/image.jpg"
+                                             class="student-photo" alt="Default Photo"
+                                             style="width: 100%; height: auto; border-radius: 5px; border: 1px solid #ccc;"/>
+                                    </div>
+
+                                    <!-- Student Details -->
+                                    <div style="font-size: 14px; line-height: 1.6;">
+                                        <p><strong>Name:</strong> <span t-field='o.name'/></p>
+                                        <p><strong>Card No:</strong>
+                                           <span t-if="o.library_card_id">
+                                               <span t-field='o.library_card_id.number'/>
+                                           </span>
+                                        </p>
+                                        <p><strong>Type:</strong>
+                                           <span t-if="o.library_card_id">
+                                               <span t-field='o.library_card_id.library_card_type_id.name'/>
+                                           </span>
+                                        </p>
+                                        <p><strong>Issued Date:</strong>
+                                           <span t-if="o.library_card_id">
+                                               <span t-field='o.library_card_id.issue_date' t-options="{'widget':'date'}"/>
+                                           </span>
+                                        </p>
+
+                                        <!-- Barcode -->
+                                        <div style="margin-top: 10px; text-align: center;" t-if="o.library_card_id.number">
+                                            <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.library_card_id.number, 250, 40)" alt="Barcode"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Divider -->
+                                <hr style="border: none; height: 2px; background-color: #2d4383; margin-top: 20px;"/>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

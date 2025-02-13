@@ -1,0 +1,16 @@
+<odoo>
+    <!-- Add a new Menu Item under your existing menu -->
+    <menuitem id="menu_student_submission"
+              name="Submissions"
+              parent="menu_op_student_root"  <!-- Replace with your core menu's ID -->
+              action="action_student_submission" />
+
+    <!-- Create an action that points to the Student Submission tree view -->
+    <record id="action_student_submission" model="ir.actions.act_window">
+        <field name="name">Submissions</field>
+        <field name="res_model">student.submission</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>  <!-- You can restrict this with domain if needed -->
+        <field name="context">{}</field>
+    </record>
+</odoo>

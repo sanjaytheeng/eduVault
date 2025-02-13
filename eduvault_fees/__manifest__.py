@@ -1,10 +1,9 @@
 
-
 {
     'name': 'eduvault Fees',
     'version': '18.0.1.0',
     'license': 'LGPL-3',
-    'category': 'Education',
+    'category': 'eduvault',
     "sequence": 3,
     'summary': 'Manage Fees',
     'complexity': "easy",

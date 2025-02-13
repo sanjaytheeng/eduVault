@@ -1,0 +1,52 @@
+<odoo>
+    <record id="view_submission_form" model="ir.ui.view">
+        <field name="name">student.submission.form</field>
+        <field name="model">student.submission</field>
+        <field name="arch" type="xml">
+            <form string="Assignment Submission">
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="assignment_id"/>
+                        <field name="submission_date"/>
+                        <field name="file_attachment"/>
+                        <field name="state" readonly="1"/>
+                        <field name="grade"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_submission_tree" model="ir.ui.view">
+        <field name="name">student.submission.tree</field>
+        <field name="model">student.submission</field>
+        <field name="arch" type="xml">
+            <list string="Submissions">
+                <field name="student_id"/>
+                <field name="assignment_id"/>
+                <field name="submission_date"/>
+                <field name="state"/>
+                <field name="grade"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Reference the full external ID for the parent menu -->
+    <menuitem id="menu_assignment_submission"
+              name="Assignment Submissions"
+              parent="eduvault_core.menu_op_student_root"
+              sequence="20"/>
+
+    <record id="action_submission_list" model="ir.actions.act_window">
+        <field name="name">Assignment Submissions</field>
+        <field name="res_model">student.submission</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_submission_tree"/> <!-- Ensure the correct reference -->
+    </record>
+
+    <menuitem id="menu_submission_list"
+              parent="menu_assignment_submission"
+              action="action_submission_list"
+              name="Submissions"/>
+</odoo>

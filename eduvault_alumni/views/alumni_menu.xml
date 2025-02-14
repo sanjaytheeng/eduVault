@@ -1,0 +1,14 @@
+<odoo>
+    <!-- Alumni Menu under Students -->
+    <menuitem
+    id="menu_alumni_root"
+    name="Alumni"
+    sequence="20"
+    parent="eduvault_core.menu_op_student_root"/>
+
+    <menuitem
+        id="menu_alumni"
+        name="Alumni Records"
+        parent="menu_alumni_root"
+        action="act_open_alumni_view"/>
+</odoo>

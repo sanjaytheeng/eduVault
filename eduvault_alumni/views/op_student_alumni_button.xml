@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the op.student form view -->
+        <record id="view_op_student_form_inherit_alumni_button" model="ir.ui.view">
+            <field name="name">op.student.form.inherit.alumni.button</field>
+            <field name="model">op.student</field>
+            <!-- Replace with the correct ref to op.student form view -->
+            <field name="inherit_id" ref="eduvault_core.view_op_student_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <!-- Add button to convert to alumni -->
+                    <button name="create_alumni_from_student"
+                            type="object"
+                            string="Convert to Alumni"
+                            class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

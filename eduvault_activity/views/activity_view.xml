@@ -25,7 +25,12 @@
                     <header/>
                     <sheet>
                         <field name="active" invisible="1"/>
+<<<<<<< HEAD
                         <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True"/>
+=======
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                        invisible="active == True"/>
+>>>>>>> 9c7c7d5 (m)
                         <group>
                             <group>
                                 <field name="student_id"/>

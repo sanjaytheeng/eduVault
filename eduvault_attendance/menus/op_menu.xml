@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <menuitem id="menu_op_attendance_root"
-                  name=" Attendances"
-                  sequence="290"
-                  web_icon="eduvault_attendance,static/description/icon.png"
-                  groups="eduvault_attendance.group_op_attendance_user,eduvault_attendance.group_op_attendance_manager"/>
+<!--        <menuitem id="menu_op_attendance_root"-->
+<!--                  name=" Attendances"-->
+<!--                  sequence="290"-->
+<!--                  web_icon="eduvault_attendance,static/description/icon.png"-->
+<!--                  groups="eduvault_attendance.group_op_attendance_user,eduvault_attendance.group_op_attendance_manager"/>-->
 
         <menuitem id="menu_op_attendance"
                   name="Attendance"
-                  parent="menu_op_attendance_root"
+                  parent="eduvault_core.menu_op_school_root"
                   sequence="10"/>
 
         <menuitem id="menu_op_attendance_register_sub"
@@ -34,8 +34,8 @@
                   groups="eduvault_attendance.group_op_attendance_manager,eduvault_attendance.group_op_attendance_user"/>
 
         <menuitem id="menu_op_attendance_config"
-                  parent="menu_op_attendance_root"
-                  name="Configuration"
+                  parent="eduvault_core.menu_op_school_config"
+                  name="Attendance Configuration"
                   sequence="40"/>
 
         <menuitem id="menu_op_attendance_type"
@@ -44,7 +44,5 @@
                   sequence="30"
                   action="act_open_op_attendance_type_view"
                   groups="eduvault_attendance.group_op_attendance_manager,eduvault_attendance.group_op_attendance_user"/>
-
-
     </data>
 </odoo>

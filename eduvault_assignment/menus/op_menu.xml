@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <menuitem id="menu_op_assignment_root" name="Assignments" sequence="300"
-                  web_icon="eduvault_assignment,static/description/icon.png"
-                  groups="eduvault_assignment.group_op_assignment_user"/>
+<!--        <menuitem id="menu_op_assignment_root" name="Assignments" sequence="300"-->
+<!--                  web_icon="eduvault_assignment,static/description/icon.png"-->
+<!--                  groups="eduvault_assignment.group_op_assignment_user"/>-->
 
         <menuitem id="menu_op_assignment_main" name="Assignments"
-                  parent="menu_op_assignment_root" sequence="10"
+                  parent="eduvault_core.menu_op_school_root" sequence="10"
                   groups="eduvault_assignment.group_op_assignment_user"/>
 
         <menuitem id="menu_op_assignment_sub" name="Assignments"
@@ -19,8 +19,8 @@
                   action="act_open_op_assignment_sub_line_view"
                   groups="eduvault_assignment.group_op_assignment_manager,eduvault_assignment.group_op_assignment_user"/>
 
-        <menuitem id="menu_op_assignment_configuration" name="Configuration"
-                  parent="menu_op_assignment_root" sequence="20"
+        <menuitem id="menu_op_assignment_configuration" name="Assignment Configuration"
+                  parent="eduvault_core.menu_op_school_config" sequence="20"
                   groups="eduvault_assignment.group_op_assignment_user"/>
 
         <menuitem id="menu_op_assignment_type_sub" name="Assignment Types"

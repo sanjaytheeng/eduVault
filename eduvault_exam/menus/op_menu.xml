@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <menuitem id="menu_op_exam_root"
-                  name="Exams"
-                  sequence="310"
-                  web_icon="eduvault_exam,static/description/icon.png"/>
+<!--        <menuitem id="menu_op_exam_root"-->
+<!--                  name="Exams"-->
+<!--                  sequence="310"-->
+<!--                  web_icon="eduvault_exam,static/description/icon.png"/>-->
 
         <menuitem id="menu_op_school_exam_result"
                   name="Exams"
-                  parent="menu_op_exam_root"
+                  parent="eduvault_core.menu_op_school_root"
                   sequence="10"/>
 
         <menuitem id="menu_op_exam_session"
@@ -62,8 +62,8 @@
 
         <menuitem id="menu_op_exam_general"
                   name="General"
-                  parent="menu_op_exam_root"
-                  sequence="20"/>
+                  parent="menu_op_school_exam_result"
+                  sequence="130"/>
 
         <menuitem id="menu_student_hall_ticket"
                   name="Student Hall Tickets"
@@ -73,9 +73,9 @@
                   groups="eduvault_exam.group_op_exam_admin,eduvault_exam.group_op_exam_user"/>
 
         <menuitem id="menu_exam_configuration"
-                  parent="menu_op_exam_root"
+                  parent="eduvault_core.menu_op_school_config"
                   sequence="30"
-                  name="Configuration"/>
+                  name="Exam Configuration"/>
 
         <menuitem id="menu_op_exam_type_sub"
                   name="Exam Types"

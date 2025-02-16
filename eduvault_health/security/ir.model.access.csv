@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_op_health_student","op.health.student.access","model_op_health","eduvault_core.group_op_faculty",1,0,0,0
+"access_op_health_faculty","op.health.faculty.access","model_op_health","eduvault_core.group_op_faculty",1,0,0,0
+"access_op_health_back_office","op.health.back_office.access","model_op_health","eduvault_core.group_op_back_office",1,1,1,1
+"access_op_health_back_office_admin","op.health.back_office_admin.access","model_op_health","eduvault_core.group_op_back_office_admin",1,1,1,1

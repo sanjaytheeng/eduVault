@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Add Health Details tab to Student Form -->
+        <record model="ir.ui.view" id="health_student_form_view">
+            <field name="name">op.student.form</field>
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="eduvault_core.view_op_student_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook" position="inside">
+                    <page name="health_detail" string="Health Detail">
+                        <field name="health_lines" colspan="4" nolabel="1">
+                            <list>
+                                <field name="blood_group" />
+                                <field name="height" />
+                                <field name="weight" />
+                                <field name="eyeglasses" />
+                                <field name="physical_challenges" />
+                                <field name="major_diseases" />
+                                <field name="regular_checkup" />
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add Health Details tab to Faculty Form -->
+        <record model="ir.ui.view" id="health_faculty_form_view">
+            <field name="name">op.faculty.form</field>
+            <field name="model">op.faculty</field>
+            <field name="inherit_id" ref="eduvault_core.view_op_faculty_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='subjects']" position="after">
+                    <page name="health_detail" string="Health Detail">
+                        <field name="health_faculty_lines" context="{'default_type': 'faculty'}" colspan="4" nolabel="1">
+                            <list>
+                                <field name="blood_group" />
+                                <field name="height" />
+                                <field name="weight" />
+                                <field name="eyeglasses" />
+                                <field name="physical_challenges" />
+                                <field name="major_diseases" />
+                                <field name="regular_checkup" />
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add Health Tree View -->
+        <record id="view_op_health_tree" model="ir.ui.view">
+            <field name="name">op.health.tree</field>
+            <field name="model">op.health</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <list string="Health">
+                    <field name="type" />
+                    <field name="student_id" />
+                    <field name="faculty_id" />
+                    <field name="blood_group" />
+                    <field name="height" />
+                    <field name="weight" />
+                    <field name="eyeglasses" />
+                    <field name="physical_challenges" />
+                    <field name="major_diseases" />
+                    <field name="regular_checkup" />
+                </list>
+            </field>
+        </record>
+
+        <!-- Add Health Form View -->
+        <record id="view_op_health_form" model="ir.ui.view">
+            <field name="name">op.health.form</field>
+            <field name="model">op.health</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Health">
+                    <sheet>
+                        <div class="oe_title">
+                            <group>
+                                <field name="type" />
+                                <field name="student_id" style="width: 100%%" visibility="{'invisible': [('type', '!=', 'student')]}"/>
+                                <field name="faculty_id" style="width: 100%%" visibility="{'invisible': [('type', '!=', 'faculty')]}"/>
+                            </group>
+                        </div>
+                        <group colspan="4" col="6">
+                            <field name="height" />
+                            <field name="weight" />
+                            <field name="blood_group" />
+                        </group>
+                        <separator colspan="4" string="Other Details" />
+                        <group colspan="4">
+                            <group colspan="4" col="4">
+                                <field name="eyeglasses" />
+                                <field name="eyeglasses_no" visibility="{'invisible': [('eyeglasses', '!=', True)]}" />
+                            </group>
+                            <group colspan="4" col="4">
+                                <field name="physical_challenges" />
+                                <field name="physical_challenges_note" visibility="{'invisible': [('physical_challenges', '!=', True)]}" />
+                            </group>
+                            <group colspan="4" col="4">
+                                <field name="major_diseases" />
+                                <field name="major_diseases_note" visibility="{'invisible': [('major_diseases', '!=', True)]}" />
+                            </group>
+                            <field name="regular_checkup" />
+                        </group>
+                        <separator colspan="4" string="Checkup Details" />
+                        <group colspan="4">
+                            <field name="health_line" nolabel="1">
+                                <list string="Checkup Line">
+                                    <field name="date" />
+                                    <field name="name" />
+                                </list>
+                                <form string="Checkup Line">
+                                    <group colspan="4">
+                                        <field name="date" />
+                                        <field name="name" />
+                                        <field name="recommendation" />
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Add Health Search View -->
+        <record id="view_op_health_search" model="ir.ui.view">
+            <field name="name">op.health.search</field>
+            <field name="model">op.health</field>
+            <field name="arch" type="xml">
+                <search string="Health">
+                    <field name="student_id"/>
+                    <field name="faculty_id"/>
+                    <field name="blood_group"/>
+                    <field name="eyeglasses"/>
+                    <field name="physical_challenges"/>
+                    <field name="major_diseases"/>
+                    <field name="regular_checkup"/>
+                    <group expand="1" string="Group By...">
+                        <filter name='student_name' string="Student Name" context="{'group_by': 'student_id'}"/>
+                        <filter name='eye_glasses' string="Eye Glasses" context="{'group_by': 'eyeglasses'}"/>
+                        <filter name='blood_group' string="Blood Group" context="{'group_by': 'blood_group'}"/>
+                        <filter name='physical_challenges' string="Physical Challenge" context="{'group_by': 'physical_challenges'}"/>
+                        <filter name='major_disease' string="Major Disease" context="{'group_by': 'major_diseases'}"/>
+                        <filter name='regular_checkup' string="Regular Checkup" context="{'group_by': 'regular_checkup'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- Add Health Action Window -->
+        <record model="ir.actions.act_window" id="act_open_op_health_view">
+            <field name="name">Health</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.health</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_op_health_search" />
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>

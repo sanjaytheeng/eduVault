@@ -148,29 +148,82 @@ class OpStudent(models.Model):
             'name': 'Fees Details',
             'view_mode': 'list,form',
             'res_model': 'op.student.fees.details',
-            'path':"student-fees-details",
             'context': {'create': False},
             'domain': [('student_id', '=', self.id)],
             'target': 'current',
         }
 
+    # def action_view_invoice(self):
+    #     '''
+    #     This function returns an action that
+    #     display existing invoices of given student ids and show a invoice"
+    #     '''
+    #     result = self.env.ref('account.action_move_out_invoice_type')
+    #     fees = result and result.id or False
+    #     result = self.env['ir.actions.act_window'].browse(fees).read()[0]
+    #     inv_ids = []
+    #     for student in self:
+    #         inv_ids += [invoice.id for invoice in student.invoice_ids]
+    #         result['context'] = {'default_partner_id': student.partner_id.id}
+    #     if len(inv_ids) > 1:
+    #         result['domain'] = \
+    #             "[('id','in',[" + ','.join(map(str, inv_ids)) + "])]"
+    #     else:
+    #         res = self.env.ref('account.view_move_form')
+    #         result['views'] = [(res and res.id or False, 'form')]
+    #         result['res_id'] = inv_ids and inv_ids[0] or False
+    #     return result
+
     def action_view_invoice(self):
         '''
-        This function returns an action that
-        display existing invoices of given student ids and show a invoice"
+        This function returns an action that:
+        1. Displays existing invoices of the given student if any.
+        2. Allows the user to create a new invoice if no existing invoices are found.
         '''
-        result = self.env.ref('account.action_move_out_invoice_type')
-        fees = result and result.id or False
-        result = self.env['ir.actions.act_window'].browse(fees).read()[0]
-        inv_ids = []
-        for student in self:
-            inv_ids += [invoice.id for invoice in student.invoice_ids]
-            result['context'] = {'default_partner_id': student.partner_id.id}
-        if len(inv_ids) > 1:
-            result['domain'] = \
-                "[('id','in',[" + ','.join(map(str, inv_ids)) + "])]"
+        # Find the invoices for this student
+        inv_ids = [invoice.id for invoice in self.invoice_ids]
+
+        # If there are existing invoices, show them
+        if inv_ids:
+            result = self.env.ref('account.action_move_out_invoice_type')
+            fees = result and result.id or False
+            result = self.env['ir.actions.act_window'].browse(fees).read()[0]
+            result['context'] = {'default_partner_id': self.partner_id.id}
+            if len(inv_ids) > 1:
+                result['domain'] = "[('id','in',[" + ','.join(map(str, inv_ids)) + "])]"
+            else:
+                res = self.env.ref('account.view_move_form')
+                result['views'] = [(res and res.id or False, 'form')]
+                result['res_id'] = inv_ids[0]
+            return result
+
+        # If no invoices exist, create a new draft invoice with fees details
         else:
-            res = self.env.ref('account.view_move_form')
-            result['views'] = [(res and res.id or False, 'form')]
-            result['res_id'] = inv_ids and inv_ids[0] or False
-        return result
+            # Prepare the invoice lines based on fees details
+            invoice_line_vals = []
+            for fees_detail in self.fees_detail_ids:
+                invoice_line_vals.append((0, 0, {
+                    'product_id': fees_detail.product_id.id,
+                    'name': fees_detail.product_id.name,
+                    'quantity': 1,
+                    'price_unit': fees_detail.amount,
+                    'discount': fees_detail.discount,
+                    'product_uom_id': fees_detail.product_id.uom_id.id,
+                }))
+
+            # Create a draft invoice
+            invoice = self.env['account.move'].create({
+                'move_type': 'out_invoice',  # Customer Invoice
+                'partner_id': self.partner_id.id,  # Assuming partner is linked to the student
+                'invoice_line_ids': invoice_line_vals,
+            })
+
+            # Prepare the action to open the invoice creation form view
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Create Invoice',
+                'view_mode': 'form',
+                'res_model': 'account.move',
+                'res_id': invoice.id,
+                'target': 'current',
+            }

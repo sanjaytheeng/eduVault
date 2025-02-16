@@ -19,6 +19,7 @@
         'views/student_view.xml',
         'views/course_view.xml',
         'views/fees_element_view.xml',
+        'views/student_fees_details.xml',
         'menus/op_menu.xml',
     ],
     'demo': [

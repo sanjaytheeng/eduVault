@@ -10,11 +10,10 @@
     'website': 'https://www.eduvault.org',
     'depends': ['base','eduvault_core'],
     'data': [
-        'views/alumni_menu.xml',
         'views/alumni_view.xml',
+        'views/alumni_menu.xml',
         'views/op_student_alumni_button.xml',
-        'security/ir.model.access.csv',
-
+        'security/ir.model.access.csv'
     ],
     'installable': True,
     'auto_install': False,

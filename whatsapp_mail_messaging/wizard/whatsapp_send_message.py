@@ -1,6 +1,5 @@
 from odoo import api, fields, models
 
-
 class WhatsappSendMessage(models.TransientModel):
     """ Wizard for sending WhatsApp messages. """
     _name = 'whatsapp.send.message'

@@ -1,8 +1,5 @@
-
-
 import logging
 from .test_admission_common import TestAdmissionCommon
-
 
 class TestAdmission(TestAdmissionCommon):
 

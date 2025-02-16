@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields, api
-
 
 class OpClassroom(models.Model):
     _name = "op.classroom"

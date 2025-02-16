@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpFeesElementLine(models.Model):
     _name = "op.fees.element"

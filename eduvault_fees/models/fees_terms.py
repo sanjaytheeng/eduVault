@@ -1,6 +1,4 @@
-
 from odoo import models, api, fields, exceptions, _
-
 
 class OpFeesTermsLine(models.Model):
     _name = "op.fees.terms.line"

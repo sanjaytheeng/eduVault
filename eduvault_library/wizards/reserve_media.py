@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class ReserveMedia(models.TransientModel):
     """ Reserve Media """

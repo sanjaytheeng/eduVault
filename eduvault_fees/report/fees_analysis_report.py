@@ -1,7 +1,4 @@
-
-
 from odoo import models, api
-
 
 class ReportFeesAnalysis(models.AbstractModel):
     _name = "report.eduvault_fees.report_fees_analysis"

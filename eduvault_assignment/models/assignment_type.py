@@ -1,6 +1,4 @@
-
 from odoo import models, fields
-
 
 class GradingAssigmentType(models.Model):
     _name = 'grading.assignment.type'

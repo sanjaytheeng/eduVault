@@ -1,8 +1,7 @@
-
 {
     'name': 'Odoo Whatsapp Connector',
     'version': '18.0.1.0.0',
-    'category': 'Extra Tools',
+    'category': 'eduvault',
     'summary': """Odoo18 Whatsapp, Whatsapp Odoo Integration, Odoo Whatsapp Connector, 
      Odoo Whatsapp, Whatsapp Connector, Whatsapp Integration, Odoo18, Whatsapp,
      Odoo Apps""",
@@ -40,7 +39,6 @@
             "whatsapp_mail_messaging/static/src/js/whatsapp_modal.js",
         ],
     },
-    'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,

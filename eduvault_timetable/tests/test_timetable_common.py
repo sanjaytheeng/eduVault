@@ -1,6 +1,4 @@
-
 from odoo.tests import common
-
 
 class TestTimetableCommon(common.TransactionCase):
     def setUp(self):

@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpFaculty(models.Model):
 

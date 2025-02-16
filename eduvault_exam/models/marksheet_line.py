@@ -1,8 +1,5 @@
-
-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
 
 class OpMarksheetLine(models.Model):
     _name = "op.marksheet.line"

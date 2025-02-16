@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpFacilityLine(models.Model):
     _inherit = "op.facility.line"

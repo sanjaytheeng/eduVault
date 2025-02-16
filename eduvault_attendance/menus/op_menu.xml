@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-<!--        <menuitem id="menu_op_attendance_root"-->
-<!--                  name=" Attendances"-->
-<!--                  sequence="290"-->
-<!--                  web_icon="eduvault_attendance,static/description/icon.png"-->
-<!--                  groups="eduvault_attendance.group_op_attendance_user,eduvault_attendance.group_op_attendance_manager"/>-->
-
         <menuitem id="menu_op_attendance"
                   name="Attendance"
                   parent="eduvault_core.menu_op_school_root"

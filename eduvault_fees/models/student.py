@@ -1,8 +1,5 @@
-
-
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-
 
 class OpStudentFeesDetails(models.Model):
     _name = "op.student.fees.details"

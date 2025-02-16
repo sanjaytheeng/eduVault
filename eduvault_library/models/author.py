@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpAuthor(models.Model):
     _name = "op.author"

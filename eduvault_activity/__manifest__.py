@@ -1,5 +1,3 @@
-
-
 {
     'name': 'eduvault Activity',
     'version': '18.0.1.0',
@@ -20,12 +18,6 @@
         'views/activity_type_view.xml',
         'views/student_view.xml',
         'menus/op_menu.xml'
-    ],
-    'demo': [
-        'demo/activity_demo.xml',
-    ],
-    'images': [
-        'static/description/eduvault_activity_banner.jpg',
     ],
     'installable': True,
     'auto_install': False,

@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpActivity(models.Model):
     _name = "op.activity"

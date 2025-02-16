@@ -1,7 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
-
 class Alumni(models.Model):
     _name = 'alumni.alumni'
     _description = 'Alumni Record'

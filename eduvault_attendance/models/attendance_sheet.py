@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields, api
-
 
 class OpAttendanceSheet(models.Model):
     _name = "op.attendance.sheet"

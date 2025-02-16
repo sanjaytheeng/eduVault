@@ -1,9 +1,6 @@
-
-
 import logging
 
 from .test_exam_common import TestExamCommon
-
 
 class TestExam(TestExamCommon):
 

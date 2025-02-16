@@ -1,9 +1,6 @@
-
-
 from logging import info
 from .test_assignment_common import TestAssignmentCommon
 import time
-
 
 class TestAssignment(TestAssignmentCommon):
 

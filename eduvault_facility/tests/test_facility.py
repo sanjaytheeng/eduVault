@@ -1,7 +1,4 @@
-
-
 from .test_facility_common import TestFacilityCommon
-
 
 class TestFacilityLine(TestFacilityCommon):
 

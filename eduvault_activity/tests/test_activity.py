@@ -1,9 +1,6 @@
-
-
 from logging import info
 
 from .test_activity_common import TestActivityCommon
-
 
 class TestActivity(TestActivityCommon):
 
@@ -22,7 +19,6 @@ class TestActivity(TestActivityCommon):
             info('      Activity Type : %s' % record.type_id.name)
             info('      Description : %s' % record.description)
             info('      Date : %s' % record.date)
-
 
 class TestActivityType(TestActivityCommon):
 

@@ -1,7 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
-
 class OpRoom(models.Model):
     _name = 'op.room'
     _description = 'Hostel Room'

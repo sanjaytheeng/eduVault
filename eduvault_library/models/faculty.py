@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields, api
-
 
 class OpFaculty(models.Model):
     _inherit = "op.faculty"

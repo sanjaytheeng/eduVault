@@ -1,7 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
-
 class OpHostelRoomAllocation(models.Model):
     _name = 'op.hostel.room'
     _description = 'Hostel Room Allocation'

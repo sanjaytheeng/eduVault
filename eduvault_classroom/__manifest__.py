@@ -1,5 +1,3 @@
-
-
 {
     'name': 'eduvault Classroom',
     'version': '18.0.1.0',
@@ -15,13 +13,6 @@
         'security/ir.model.access.csv',
         'views/classroom_view.xml',
         'menus/op_menu.xml',
-    ],
-    'demo': [
-        'demo/classroom_demo.xml',
-        'demo/facility_line_demo.xml'
-    ],
-    'images': [
-        'static/description/eduvault_classroom_banner.jpg',
     ],
     'installable': True,
     'auto_install': False,

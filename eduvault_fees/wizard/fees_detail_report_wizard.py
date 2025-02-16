@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class FeesDetailReportWizard(models.TransientModel):
     """ Admission Analysis Wizard """

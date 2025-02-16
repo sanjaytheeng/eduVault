@@ -1,10 +1,8 @@
-
 import calendar
 import pytz
 import time
 from datetime import datetime
 from odoo import models, api, _, tools, fields
-
 
 class ReportTimeTableTeacherGenerate(models.AbstractModel):
     _name = "report.eduvault_timetable.report_timetable_teacher_generate"

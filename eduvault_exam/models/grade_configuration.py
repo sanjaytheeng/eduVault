@@ -1,7 +1,5 @@
-
 from odoo import models, fields,api,_
 from odoo.exceptions import ValidationError
-
 
 class OpGradeConfiguration(models.Model):
     _name = "op.grade.configuration"

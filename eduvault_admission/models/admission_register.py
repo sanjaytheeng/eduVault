@@ -1,9 +1,6 @@
-
-
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
 
 class OpAdmissionRegister(models.Model):
     _name = "op.admission.register"

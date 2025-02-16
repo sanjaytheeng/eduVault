@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpExamType(models.Model):
     _name = "op.exam.type"

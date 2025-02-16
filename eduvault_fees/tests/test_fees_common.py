@@ -1,6 +1,4 @@
-
 from odoo.tests import TransactionCase
-
 
 class TestFeesCommon(TransactionCase):
     def setUp(self):

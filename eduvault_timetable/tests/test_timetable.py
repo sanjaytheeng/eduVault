@@ -1,9 +1,6 @@
-
-
 from logging import info
 import time
 from .test_timetable_common import TestTimetableCommon
-
 
 class TestFacultySession(TestTimetableCommon):
 

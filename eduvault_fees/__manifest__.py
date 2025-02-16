@@ -1,4 +1,3 @@
-
 {
     'name': 'eduvault Fees',
     'version': '18.0.1.0',
@@ -21,9 +20,6 @@
         'views/course_view.xml',
         'views/fees_element_view.xml',
         'menus/op_menu.xml',
-    ],
-    'images': [
-        'static/description/eduvault_fees_banner.jpg',
     ],
     'demo': [
         'demo/product_category_demo.xml',

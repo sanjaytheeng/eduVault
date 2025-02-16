@@ -1,8 +1,5 @@
-
-
 import time
 from odoo import models, api
-
 
 class ReportLibraryCardBarcode(models.AbstractModel):
     _name = "report.eduvault_library.report_library_card_barcode"

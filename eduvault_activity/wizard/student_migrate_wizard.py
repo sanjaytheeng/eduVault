@@ -1,8 +1,5 @@
-
-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
 
 class StudentMigrate(models.TransientModel):
     """ Student Migration Wizard """

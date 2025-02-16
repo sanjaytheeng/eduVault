@@ -1,8 +1,4 @@
-
-
-
 from odoo.tests import TransactionCase
-
 
 class TestAssignmentCommon(TransactionCase):
     def setUp(self):

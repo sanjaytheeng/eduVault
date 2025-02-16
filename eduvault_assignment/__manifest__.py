@@ -1,4 +1,3 @@
-
 {
     'name': 'eduvault Assignment',
     'version': '18.0.1.0',
@@ -22,14 +21,6 @@
         'views/student_view.xml',
         'data/action_rule_data.xml',
         'menus/op_menu.xml',
-    ],
-    'demo': [
-        'demo/assignment_type_demo.xml',
-        'demo/assignment_demo.xml',
-        'demo/assignment_sub_line_demo.xml'
-    ],
-    'images': [
-        'static/description/eduvault_assignment_banner.jpg',
     ],
     'installable': True,
     'auto_install': False,

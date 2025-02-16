@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpMedia(models.Model):
     _name = "op.media"

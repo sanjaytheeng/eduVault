@@ -1,9 +1,6 @@
-
-
 from logging import info
 import time
 from .test_attendance_common import TestAttendanceCommon
-
 
 class TestAttendanceRegister(TestAttendanceCommon):
 

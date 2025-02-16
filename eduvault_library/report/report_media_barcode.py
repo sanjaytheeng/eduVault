@@ -1,8 +1,5 @@
-
-
 import time
 from odoo import models, api
-
 
 class ReportMediaBarcode(models.AbstractModel):
     _name = "report.eduvault_library.report_media_barcode"

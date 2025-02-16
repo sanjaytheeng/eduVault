@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpHealthLine(models.Model):
     _name = 'op.health.line'

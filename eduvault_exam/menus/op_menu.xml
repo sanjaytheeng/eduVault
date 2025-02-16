@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-<!--        <menuitem id="menu_op_exam_root"-->
-<!--                  name="Exams"-->
-<!--                  sequence="310"-->
-<!--                  web_icon="eduvault_exam,static/description/icon.png"/>-->
-
         <menuitem id="menu_op_school_exam_result"
                   name="Exams"
                   parent="eduvault_core.menu_op_school_root"

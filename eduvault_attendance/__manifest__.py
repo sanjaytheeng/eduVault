@@ -1,5 +1,3 @@
-
-
 {
     'name': 'eduvault Attendance',
     'version': '18.0.1.0',
@@ -25,14 +23,6 @@
         'report/student_attendance_report.xml',
         'report/report_menu.xml',
         'menus/op_menu.xml'
-    ],
-    'demo': [
-        'demo/attendance_register_demo.xml',
-        'demo/attendance_sheet_demo.xml',
-        'demo/attendance_line_demo.xml',
-    ],
-    'images': [
-        'static/description/eduvault_attendance_banner.jpg',
     ],
     'installable': True,
     'auto_install': False,

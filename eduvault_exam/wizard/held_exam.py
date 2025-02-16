@@ -1,7 +1,4 @@
-
-
 from odoo import models, api, fields
-
 
 class OpHeldExam(models.TransientModel):
     _name = "op.held.exam"

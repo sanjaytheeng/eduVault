@@ -1,4 +1,3 @@
-
 {
     'name': 'eduvault Timetable',
     'version': '18.0.1.0',
@@ -25,13 +24,6 @@
         'wizard/session_confirmation.xml',
         'views/timetable_templates.xml',
         'menus/op_menu.xml',
-    ],
-    'demo': [
-        'demo/timing_demo.xml',
-        'demo/op_timetable_demo.xml'
-    ],
-    'images': [
-        'static/description/eduvault_timetable_banner.jpg',
     ],
     'installable': True,
     'auto_install': False,

@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpSession(models.Model):
     _inherit = "op.session"

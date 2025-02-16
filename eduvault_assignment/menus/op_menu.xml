@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-<!--        <menuitem id="menu_op_assignment_root" name="Assignments" sequence="300"-->
-<!--                  web_icon="eduvault_assignment,static/description/icon.png"-->
-<!--                  groups="eduvault_assignment.group_op_assignment_user"/>-->
-
         <menuitem id="menu_op_assignment_main" name="Assignments"
                   parent="eduvault_core.menu_op_school_root" sequence="10"
                   groups="eduvault_assignment.group_op_assignment_user"/>

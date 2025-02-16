@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpAsset(models.Model):
     _name = "op.asset"

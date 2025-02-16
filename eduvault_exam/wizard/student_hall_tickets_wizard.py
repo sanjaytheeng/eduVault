@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class StudentHallTicket(models.TransientModel):
     """ Student Hall Ticket Wizard """

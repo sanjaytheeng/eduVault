@@ -1,7 +1,4 @@
-
-
 from odoo import models
-
 
 class OpStudent(models.Model):
     _inherit = "op.student"

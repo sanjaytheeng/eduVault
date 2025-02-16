@@ -1,6 +1,4 @@
-
 from .test_parent_common import TestParentCommon
-
 
 class TestParent(TestParentCommon):
 

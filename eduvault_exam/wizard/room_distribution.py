@@ -1,8 +1,5 @@
-
-
 from odoo import models, api, fields, exceptions, _
 from odoo.exceptions import ValidationError
-
 
 class OpRoomDistribution(models.TransientModel):
     """ Exam Room Distribution """

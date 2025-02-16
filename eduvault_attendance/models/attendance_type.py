@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpAttendanceType(models.Model):
     _name = "op.attendance.type"

@@ -1,6 +1,4 @@
-
 from odoo.tests import common
-
 
 class TestAttendanceCommon(common.TransactionCase):
     def setUp(self):

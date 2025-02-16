@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpTiming(models.Model):
     _name = "op.timing"

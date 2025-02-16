@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields, api
-
 
 class OpAttendanceLine(models.Model):
     _name = "op.attendance.line"

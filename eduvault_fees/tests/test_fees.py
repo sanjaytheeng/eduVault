@@ -1,9 +1,5 @@
-
-
 from logging import info
-
 from .test_fees_common import TestFeesCommon
-
 
 class TestStudentFees(TestFeesCommon):
 

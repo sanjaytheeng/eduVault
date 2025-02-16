@@ -1,7 +1,4 @@
-
-
 from odoo import models
-
 
 class SessionConfirmation(models.TransientModel):
     _name = "session.confirmation"

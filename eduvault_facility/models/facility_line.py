@@ -1,8 +1,5 @@
-
-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
 
 class OpFacilityLine(models.Model):
     _name = "op.facility.line"

@@ -1,8 +1,4 @@
-
-
-
 from odoo.tests import common
-
 
 class TestClassroomCommon(common.TransactionCase):
     def setUp(self):

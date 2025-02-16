@@ -1,8 +1,5 @@
-
-
 import time
 from odoo import models, api, fields
-
 
 class ReportMarksheetReport(models.AbstractModel):
     _name = "report.eduvault_exam.report_marksheet_report"

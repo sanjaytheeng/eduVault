@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpTag(models.Model):
     _name = "op.tag"

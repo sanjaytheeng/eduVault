@@ -1,8 +1,5 @@
-
-
 from logging import info
 from .test_classroom_common import TestClassroomCommon
-
 
 class TestClassroom(TestClassroomCommon):
 

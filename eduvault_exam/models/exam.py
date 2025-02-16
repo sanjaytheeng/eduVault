@@ -1,9 +1,7 @@
-
 import datetime
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
 
 class OpExam(models.Model):
     _name = "op.exam"

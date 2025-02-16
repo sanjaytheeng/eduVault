@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields, api
-
 
 class OpAttendanceRegister(models.Model):
     _name = "op.attendance.register"

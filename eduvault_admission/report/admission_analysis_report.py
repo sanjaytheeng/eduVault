@@ -1,9 +1,5 @@
-
-
 import time
-
 from odoo import models, api
-
 
 class ReportAdmissionAnalysis(models.AbstractModel):
     _name = "report.eduvault_admission.report_admission_analysis"

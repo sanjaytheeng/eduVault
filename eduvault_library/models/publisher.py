@@ -1,7 +1,4 @@
-
-
 from odoo import models, fields
-
 
 class OpPublisher(models.Model):
     _name = "op.publisher"

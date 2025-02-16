@@ -1,5 +1,3 @@
-
-
 {
     'name': 'eduvault Hostel',
     'version': '18.0.1.0.0',
@@ -20,14 +18,6 @@
         'views/hostel_room_view.xml',
         'hostel_menu.xml',
         'security/ir.model.access.csv',
-    ],
-    'demo': [
-        'demo/hostel_demo.xml',
-        'demo/room_demo.xml',
-        'demo/hostel_room_demo.xml',
-    ],
-    'images': [
-        'static/description/eduvault_hostel_banner.jpg',
     ],
     'installable': True,
     'auto_install': False,

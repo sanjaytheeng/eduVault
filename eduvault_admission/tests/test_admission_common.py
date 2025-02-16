@@ -1,7 +1,4 @@
-
-
 from odoo.tests import TransactionCase
-
 
 class TestAdmissionCommon(TransactionCase):
     def setUp(self):

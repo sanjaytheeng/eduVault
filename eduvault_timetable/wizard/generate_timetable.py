@@ -1,5 +1,3 @@
-
-
 import calendar
 import datetime
 import pytz
@@ -7,7 +5,6 @@ import time
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-
 
 class GenerateSession(models.TransientModel):
     _name = "generate.time.table"

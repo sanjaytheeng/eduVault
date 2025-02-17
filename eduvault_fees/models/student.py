@@ -5,6 +5,7 @@ class OpStudentFeesDetails(models.Model):
     _name = "op.student.fees.details"
     _description = "Student Fees Details"
     _rec_name = 'student_id'
+    
 
     fees_line_id = fields.Many2one('op.fees.terms.line', 'Fees Line')
     invoice_id = fields.Many2one('account.move', 'Invoice ID')
@@ -135,6 +136,7 @@ class OpStudent(models.Model):
                                       string='Fees Collection Details',
                                       tracking=True)
     fees_details_count = fields.Integer(compute='_compute_fees_details')
+    invoice_id = fields.Many2one('account.move', string = 'Invoice')
 
     @api.depends('fees_detail_ids')
     def _compute_fees_details(self):

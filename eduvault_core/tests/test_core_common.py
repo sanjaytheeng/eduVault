@@ -1,6 +1,3 @@
-
-
-
 from odoo.tests import TransactionCase
 
 

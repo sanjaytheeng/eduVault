@@ -63,26 +63,13 @@
     'css': [
         'static/src/scss/base.scss'
     ],
-    'qweb': [
-        'static/src/xml/base.xml',
-        'static/src/xml/dashboard_ext_eduvault.xml'
-    ],
     'js': [],
-    'images': [
-        'static/description/eduvault_core_banner.jpg',
-    ],
     'installable': True,
     'auto_install': False,
     'application': True,
     'assets': {
         'website.assets_frontend': [
             '/eduvault_core/static/src/scss/main.scss',
-        ],
-        'web.assets_backend': [
-            '/eduvault_core/static/src/scss/style.scss',
-            '/eduvault_core/static/src/js/g2_review.js',
-            '/eduvault_core/static/src/xml/review.xml',
-            '/eduvault_core/static/src/xml/web_client.xml',
         ],
     },
 }

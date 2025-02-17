@@ -26,7 +26,7 @@ class OpRoom(models.Model):
     )
 
     # Define the One2many field linking students to rooms
-    student_ids = fields.One2many('op.student', 'room_id',
+    student_ids = fields.One2many('op.facility.line', 'room_id',
                                   string='Students')  # Assuming you have a model 'op.student' with a 'room_id' field
 
     # Define a computed field for students count

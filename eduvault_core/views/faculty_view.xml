@@ -209,6 +209,14 @@
             <field name="context">{}</field>
         </record>
 
+        <record id="action_view_faculty" model="ir.actions.act_window">
+            <field name="name">View Faculty</field>
+            <field name="res_model">op.faculty</field>
+            <field name="view_mode">form</field>
+            <field name="target">current</field>
+            <field name="domain">[('id', '=', context.get('faculty_id'))]</field>
+        </record>
+
         <record model="ir.actions.act_window.view" id="act_open_op_faculty_view_form">
             <field name="act_window_id" ref="act_open_op_faculty_view"/>
             <field name="sequence" eval="20"/>

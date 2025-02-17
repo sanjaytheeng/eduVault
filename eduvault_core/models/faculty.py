@@ -8,7 +8,7 @@ class OpFaculty(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _inherits = {"res.partner": "partner_id"}
     _parent_name = False
-    
+
     partner_id = fields.Many2one('res.partner', 'Partner',
                                  required=True, ondelete="cascade")
     first_name = fields.Char('First Name', translate=True, required=True)
@@ -28,7 +28,7 @@ class OpFaculty(models.Model):
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female')
-    ], 'Gender', required=True)
+    ], 'Gender', required=False)
     nationality = fields.Many2one('res.country', 'Nationality')
     emergency_contact = fields.Many2one(
         'res.partner', 'Emergency Contact')
@@ -85,3 +85,72 @@ class OpFaculty(models.Model):
             'label': _('Import Template for Faculties'),
             'template': '/eduvault_core/static/xls/op_faculty.xls'
         }]
+
+class HREmployee(models.Model):
+    _inherit = "hr.employee"
+
+    faculty_id = fields.Many2one('op.faculty', 'Faculty Record', readonly=True)
+
+    faculty_id = fields.Many2one('op.faculty', 'Faculty Record', readonly=True)
+
+    def action_create_faculty(self):
+        """
+        Button action to create or update a faculty record from an employee without requiring a user account.
+        Uses fields from the custom op.faculty model.
+        """
+        for employee in self:
+            # Initialize variables for first, middle, and last names
+            first_name = ''
+            middle_name = ''
+            last_name = ''
+
+            # Check if the employee has a name and split it into components
+            if employee.name:
+                name_parts = employee.name.split()
+                first_name = name_parts[0] if len(name_parts) > 0 else ''
+                middle_name = " ".join(name_parts[1:-1]) if len(name_parts) > 2 else ''
+                last_name = name_parts[-1] if len(name_parts) > 1 else ''
+
+            # Ensure partner_id is set or create a new partner if needed
+            partner_vals = {
+                'name': f"{first_name} {middle_name} {last_name}".strip(),
+                # Use .strip() to remove any unnecessary spaces
+            }
+
+            # Create partner record if not already existing
+            partner = employee.user_id.partner_id if employee.user_id else self.env['res.partner'].create(partner_vals)
+
+            # Check if faculty record exists or create a new one
+            if employee.faculty_id:
+                # Update the existing faculty record
+                faculty = employee.faculty_id
+            else:
+                # Create a new faculty record
+                faculty_vals = {
+                    'partner_id': partner.id,
+                    'first_name': first_name,
+                    'middle_name': middle_name,
+                    'last_name': last_name,
+                    'gender': employee.gender,
+                    'email': employee.private_email,
+                    'phone': employee.private_phone,
+                    'birth_date': employee.birthday,
+                    'emp_id': employee.id,
+                }
+                faculty = self.env['op.faculty'].create(faculty_vals)
+
+            # Update faculty record with any new or changed data
+            faculty.write({
+                'first_name': first_name,
+                'middle_name': middle_name,
+                'last_name': last_name,
+                'gender': employee.gender,
+                'email': employee.private_email,
+                'phone': employee.private_phone,
+                'birth_date': employee.birthday,
+            })
+
+            # Link Faculty to Employee
+            employee.faculty_id = faculty.id
+
+

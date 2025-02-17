@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
         <record id="view_employee_form_address_inherit" model="ir.ui.view">
@@ -6,12 +5,17 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
+                <!-- Add Faculty Button -->
+                <xpath expr="//header" position="inside">
+                    <button name="action_create_faculty" type="object" string="Add as Faculty" class="oe_highlight"/>
+                </xpath>
+
+                <!-- Replace other fields -->
                 <field name="private_state_id" position="replace">
                     <field name="private_state_id" context="{'show_address': 1, 'employee': True}" options='{"always_reload": True, "highlight_first_line": True}'/>
                 </field>
                 <field name="address_id" position="replace">
-                    <field name="address_id" context="{'show_address': 1}"
-                           options='{"always_reload": True, "highlight_first_line": True}'/>
+                    <field name="address_id" context="{'show_address': 1}" options='{"always_reload": True, "highlight_first_line": True}'/>
                 </field>
                 <field name="user_id" position="replace">
                     <field name="user_id" string="Related User" domain="[('partner_id', '=', 'address_home_id')]"/>

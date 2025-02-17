@@ -41,6 +41,10 @@ class OpStudentCourse(models.Model):
             'template': '/eduvault_core/static/xls/op_student_course.xls'
         }]
 
+class ResPartner(models.Model):
+    _inherit='res.partner'
+
+    course_id = fields.Many2one('op.course', 'Course')
 
 class OpStudent(models.Model):
     _name = "op.student"

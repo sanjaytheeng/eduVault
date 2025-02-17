@@ -23,8 +23,8 @@
                 <form string="Fees Reminder Terms">
                     <header/>
                     <sheet>
-                        <field name="active" invisible="1"/>
-                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+<field name="active" invisible="1"/>
+                                                <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
                                 invisible="active == True"/>
                         <group>
                             <group>

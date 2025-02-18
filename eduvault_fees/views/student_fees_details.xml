@@ -1,4 +1,5 @@
 <odoo>
+    <!-- List View -->
     <record id="view_student_fees_details_list" model="ir.ui.view">
         <field name="name">op.student.fees.details.list</field>
         <field name="model">op.student.fees.details</field>
@@ -15,14 +16,48 @@
                 <field name="after_discount_amount"/>
                 <field name="course_id"/>
                 <field name="batch_id"/>
+                <field name="currency_id" invisible="1"/>
             </list>
         </field>
     </record>
 
+    <!-- Form View -->
+    <record id="view_student_fees_details_form" model="ir.ui.view">
+        <field name="name">op.student.fees.details.form</field>
+        <field name="model">op.student.fees.details</field>
+        <field name="arch" type="xml">
+            <form string="Student Fees Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="fees_line_id"/>
+                            <field name="invoice_id"/>
+                            <field name="product_id"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                            <field name="discount"/>
+                            <field name="after_discount_amount"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="course_id"/>
+                            <field name="batch_id"/>
+                            <field name="state"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Window (Allows Click-to-Form) -->
     <record id="action_student_fees_details" model="ir.actions.act_window">
         <field name="name">Student Fees Details</field>
         <field name="res_model">op.student.fees.details</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>  <!-- Enables both views -->
         <field name="view_id" ref="view_student_fees_details_list"/>
         <field name="target">current</field>
     </record>

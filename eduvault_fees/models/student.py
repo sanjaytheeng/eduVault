@@ -33,6 +33,7 @@ class OpStudentFeesDetails(models.Model):
 
     course_id = fields.Many2one('op.course', 'Course', required=False)
     batch_id = fields.Many2one('op.batch', 'Batch', required=False)
+    currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
 
     @api.depends('discount')
     def _compute_discount_amount(self):
@@ -145,15 +146,10 @@ class OpStudent(models.Model):
                 [('student_id', '=', self.id)])
 
     def count_fees_details(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Student Fees Details',
-            'view_mode': 'list,form',
-            'res_model': 'op.student.fees.details',
-            'context': {'create': False},
-            'domain': [('student_id', '=', self.id)],
-            'target': 'current',
-        }
+        action = self.env.ref('eduvault_fees.action_student_fees_details').sudo().read()[0]  # Use correct module name
+        action['domain'] = [('student_id', '=', self.id)]  # Add domain filter
+        action['context'] = {'create': False}  # Prevent creation of new records
+        return action
 
     def action_view_invoice(self):
         '''

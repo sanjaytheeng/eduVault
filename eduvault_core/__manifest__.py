@@ -60,6 +60,7 @@
         'demo/op_academic_year_demo.xml',
         'demo/op_academic_term_demo.xml',
     ],
+    'controllers': ['controllers/app_main.py'],
     'css': [
         'static/src/scss/base.scss'
     ],

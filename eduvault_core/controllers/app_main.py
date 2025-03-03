@@ -23,16 +23,10 @@ class StudentController(http.Controller):
                 'gender': student.gender,
                 'birth_date': str(student.birth_date) if student.birth_date else None,
                 'email': student.partner_id.email or None,
-<<<<<<< HEAD
-                'phone': student.partner_id.phone or None,
-                'gr_no': student.gr_no or None,  # Registration Number
-                'image': student.partner_id.image_1920.decode() if student.partner_id.image_1920 else None,  # Base64 Image
-=======
                 'phone': student.partner_id.mobile or None,
                 'gr_no': student.gr_no or None,  # Registration Number
-                'image': student.partner_id.image_1920.decode() if student.partner_id.image_1920 else None,
-                # Base64 Image
->>>>>>> 784ef3a1481e5030312a226de87545ea3000ce38
+                'category': student.category_id.name if student.category_id else None,
+                'image_url': f"/api/students/image/{student.id}" if student.partner_id.image_1920 else None,
             })
 
         return Response(json.dumps(student_list), content_type='application/json')
@@ -54,17 +48,24 @@ class StudentController(http.Controller):
             'gender': student.gender,
             'birth_date': str(student.birth_date) if student.birth_date else None,
             'email': student.partner_id.email or None,
-<<<<<<< HEAD
-            'phone': student.partner_id.phone or None,
-=======
             'phone': student.partner_id.mobile or None,
->>>>>>> 784ef3a1481e5030312a226de87545ea3000ce38
             'gr_no': student.gr_no or None,  # Registration Number
             'category': student.category_id.name if student.category_id else None,
-            'image': student.partner_id.image_1920.decode() if student.partner_id.image_1920 else None,  # Base64 Image
+            'image_url': f"/api/students/image/{student.id}" if student.partner_id.image_1920 else None,
         }
 
         return Response(json.dumps(student_data), content_type='application/json')
+
+    # GET student image as a URL
+    @http.route('/api/students/image/<int:student_id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_student_image(self, student_id):
+        student = request.env['op.student'].browse(student_id)
+
+        if not student.exists() or not student.partner_id.image_1920:
+            return Response(json.dumps({'error': 'Image not found'}), content_type='application/json', status=404)
+
+        image_data = student.partner_id.image_1920
+        return Response(image_data, content_type='image/png')  # Change format if needed
 
     # POST - Create a new student
     @http.route('/api/students', type='http', auth='public', methods=['POST'], csrf=False)
@@ -77,6 +78,13 @@ class StudentController(http.Controller):
                 return Response(json.dumps({'error': 'Fields "first_name" and "last_name" are required.'}),
                                 content_type='application/json')
 
+            new_partner = request.env['res.partner'].create({
+                'name': f"{data.get('first_name')} {data.get('last_name')}",
+                'email': data.get('email', ''),
+                'phone': data.get('phone', ''),
+                'image_1920': data.get('image') if data.get('image') else None,  # Base64 Image
+            })
+
             new_student = request.env['op.student'].create({
                 'first_name': data.get('first_name'),
                 'middle_name': data.get('middle_name', ''),
@@ -85,12 +93,7 @@ class StudentController(http.Controller):
                 'birth_date': data.get('birth_date', ''),
                 'gr_no': data.get('gr_no', ''),  # Registration Number
                 'category_id': data.get('category_id'),
-                'partner_id': request.env['res.partner'].create({
-                    'name': f"{data.get('first_name')} {data.get('last_name')}",
-                    'email': data.get('email', ''),
-                    'phone': data.get('phone', ''),
-                    'image_1920': data.get('image') if data.get('image') else None,  # Base64 Image
-                }).id,
+                'partner_id': new_partner.id,
             })
 
             return Response(json.dumps({'id': new_student.id, 'status': 'Student created successfully'}),

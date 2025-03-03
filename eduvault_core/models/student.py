@@ -83,6 +83,7 @@ class OpStudent(models.Model):
                                         tracking=True)
     active = fields.Boolean(default=True)
 
+
     _sql_constraints = [(
         'unique_gr_no',
         'unique(gr_no)',

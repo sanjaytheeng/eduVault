@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="view_op_student_form_inherit_application_number" model="ir.ui.view">
+    <field name="name">op.student.form.inherit.application.number</field>
+    <field name="model">op.student</field>
+    <field name="inherit_id" ref="eduvault_core.view_op_student_form"/>
+    <field name="arch" type="xml">
+        <group position="inside">
+            <field name="application_number" readonly="1"/>
+        </group>
+    </field>
+</record>
+    </data>
+</odoo>
+
+

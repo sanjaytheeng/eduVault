@@ -452,3 +452,10 @@ class ResConfigSettings(models.TransientModel):
 
     is_global_student_user = fields.Boolean(config_parameter='eduvault_admission.global_student_user',
     string='Create Student User')
+
+class OpStudent(models.Model):
+    _inherit = "op.student"
+
+    application_number = fields.Char(
+        'Application Number', size=16, copy=False,
+        readonly=True, store=True)

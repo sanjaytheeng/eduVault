@@ -15,34 +15,34 @@
                                     <div class="o_kanban_image" style="background:#e6e5e6;">
                                         <t t-if="record.image_1920.value">
                                             <img
-                                                t-att-src="kanban_image('op.student', 'image_1920', record.id.raw_value)"
-                                                alt="Student" />
+                                                    t-att-src="kanban_image('op.student', 'image_1920', record.id.raw_value)"
+                                                    alt="Student"/>
                                         </t>
                                         <t t-if="!record.image_1920.value">
-                                            <img src="/base/static/img/avatar.png" alt="Student" />
+                                            <img src="/base/static/img/avatar.png" alt="Student"/>
                                         </t>
                                     </div>
                                     <div class="oe_kanban_details">
                                         <h4>
-                                            <field name="name" />
+                                            <field name="name"/>
                                         </h4>
                                         <ul>
                                             <li t-if="record.contact_address.raw_value">
-                                                <field name="contact_address" />
+                                                <field name="contact_address"/>
                                             </li>
                                             <li t-if="record.phone.raw_value">
-                                                <field name="phone" />
+                                                <field name="phone"/>
                                             </li>
                                             <li t-if="record.mobile.raw_value">
-                                                <field name="mobile" />
+                                                <field name="mobile"/>
                                             </li>
                                             <li t-if="record.email.raw_value">
                                                 <a t-attf-href="mailto:#{record.email.value}">
-                                                    <field name="email" />
+                                                    <field name="email"/>
                                                 </a>
                                             </li>
                                             <li t-if="record.lang.raw_value">
-                                                <field name="lang" />
+                                                <field name="lang"/>
                                             </li>
                                         </ul>
                                     </div>
@@ -86,23 +86,24 @@
                                 string="Create Student User"
                                 class="oe_highlight"
                                 groups="eduvault_core.group_op_back_office_admin"
-                                invisible ="user_id != False"/>
+                                invisible="user_id != False"/>
                     </header>
                     <sheet>
                         <div name="button_box" class="oe_button_box">
                         </div>
                         <field name="active" invisible="1"/>
                         <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
-                                invisible ="active == True"/>
+                                invisible="active == True"/>
                         <div style="width:100%;" class="row align-items-center">
                             <div class="col-4 col-lg-2" style="text-align-last: center;">
-                                <field name="image_1920" widget="image" class="oe_left oe_avatar" style="margin-right: 30px !important;"/>
+                                <field name="image_1920" widget="image" class="oe_left oe_avatar"
+                                       style="margin-right: 30px !important;"/>
                             </div>
                             <div class="mb16 col-8 col-lg-10 px-0">
                                 <div class="row">
-                                    <h2 class="col-12 col-lg-2">
-                                        <field name="title" placeholder="Title"/>
-                                    </h2>
+<!--                                    <h2 class="col-12 col-lg-2">-->
+<!--                                        <field name="title" placeholder="Title"/>-->
+<!--                                    </h2>-->
                                     <h2 class="col-12 col-lg-10">
                                         <field name="name" placeholder="Name" required="1" invisible="1"/>
                                         <table>
@@ -124,45 +125,46 @@
                         </div>
                         <notebook colspan="4">
                             <page name="personal_information" string="Personal Information">
-                                <group name="personal_detail">
-                                    <group>
-                                        <field name="gender" required="1"/>
-                                        <field name="birth_date"/>
-                                        <label for="type"/>
-                                        <div name="div_type">
-                                            <field class="oe_inline" name="type"/>
-                                        </div>
-                                        <label for="street" string="Address"/>
-                                        <div name="o_address_format">
-                                            <field name="street" placeholder="Street..."/>
-                                            <field name="street2" placeholder="Street2"/>
-                                            <div class="address_format">
-                                                <field name="city" placeholder="City" style="width: 40%"/>
-                                                <field name="state_id" class="oe_no_button" placeholder="State"
-                                                       style="width: 37%" options="{&quot;no_open&quot;: True}"/>
-                                                <field name="zip" placeholder="ZIP" style="width: 20%"/>
-                                            </div>
-                                            <field name="country_id" placeholder="Country" class="oe_no_button"
-                                                   options="{&quot;no_open&quot;: True}"/>
-                                        </div>
-                                        <field name="emergency_contact" context="{'show_address': 1}"
-                                               options="{&quot;always_reload&quot;: True}"/>
+                                <group>
+                                    <group name="personal_detail" string="A. Personal Details">
+                                        <group>
+                                            <field name="gender" required="1"/>
+                                            <field name="birth_date"/>
+                                            <field name="birth_place"/>
+                                            <field name="citizenship_number"/>
+                                            <field name="ethnicity" style = "width: 150%"/>
+                                            <field name="blood_group"/>
+                                            <field name="nationality"/>
+                                        </group>
                                     </group>
-                                    <group>
-                                        <field name="email"/>
-                                        <field name="mobile"/>
-                                        <field name="lang"/>
-                                        <field name="blood_group"/>
-                                        <field name="nationality"/>
-                                        <field name="visa_info"/>
-                                        <field name="category_id"/>
-                                        <field name="user_id" string="User" readonly="1"/>
-                                        <field name="partner_id" placeholder="Partner" required="0"/>
+                                    <group name="contact_detail" string="B. Contact Details">
+                                        <group>
+                                            <label for="street" string="Address"/>
+                                            <div name="o_address_format">
+                                                <field name="country_id" placeholder="Country" class="oe_no_button"
+                                                   options="{&quot;no_open&quot;: True}"/>
+                                                <field name="street" placeholder="Street..."/>
+                                                <div class="address_format">
+                                                    <field name="city" placeholder="City" style="width: 50%"/>
+                                                    <field name="state_id" class="oe_no_button" placeholder="State"
+                                                           style="width: 50%" options="{&quot;no_open&quot;: True}"/>
+                                                    <field name="zip" placeholder="ZIP" style="width: 37%"/>
+                                                </div>
+                                            </div>
+                                            <field name="email"/>
+                                            <field name="mobile"/>
+                                            <field name="lang"/>
+                                            <field name="emergency_contact" context="{'show_address': 1}"
+                                                   options="{&quot;always_reload&quot;: True}"/>
+                                            <field name="category_id"/>
+                                            <field name="user_id" string="User" readonly="1"/>
+                                            <field name="partner_id" placeholder="Partner" required="0"/>
+                                        </group>
                                     </group>
                                     <separator string="miscellaneous" colspan="2"/>
-                                        <group colspan="3">
-                                            <field name="gr_no"/>
-                                        </group>
+                                    <group colspan="3">
+                                        <field name="gr_no"/>
+                                    </group>
                                 </group>
                             </page>
                         </notebook>

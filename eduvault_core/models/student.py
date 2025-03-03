@@ -53,7 +53,9 @@ class OpStudent(models.Model):
     first_name = fields.Char('First Name',  translate=True)
     middle_name = fields.Char('Middle Name', translate=True)
     last_name = fields.Char('Last Name', translate=True)
-    birth_date = fields.Date('Birth Date')
+    birth_date = fields.Date('Date of Birth')
+    birth_place = fields.Char('Place of Birth', size=64)
+    ethnicity = fields.Char('Ethnicity', size=64)
     blood_group = fields.Selection([
         ('A+', 'A+ve'),
         ('B+', 'B+ve'),
@@ -71,6 +73,7 @@ class OpStudent(models.Model):
     ], 'Gender', required=True, default='m')
     nationality = fields.Many2one('res.country', 'Nationality')
     emergency_contact = fields.Many2one('res.partner', 'Emergency Contact')
+    citizenship_number = fields.Integer('Citizenship Number')
     visa_info = fields.Char('Visa Info', size=64)
     id_number = fields.Char('ID Card Number', size=64)
     partner_id = fields.Many2one('res.partner', 'Partner',

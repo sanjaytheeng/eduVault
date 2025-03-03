@@ -23,9 +23,16 @@ class StudentController(http.Controller):
                 'gender': student.gender,
                 'birth_date': str(student.birth_date) if student.birth_date else None,
                 'email': student.partner_id.email or None,
+<<<<<<< HEAD
                 'phone': student.partner_id.phone or None,
                 'gr_no': student.gr_no or None,  # Registration Number
                 'image': student.partner_id.image_1920.decode() if student.partner_id.image_1920 else None,  # Base64 Image
+=======
+                'phone': student.partner_id.mobile or None,
+                'gr_no': student.gr_no or None,  # Registration Number
+                'image': student.partner_id.image_1920.decode() if student.partner_id.image_1920 else None,
+                # Base64 Image
+>>>>>>> 784ef3a1481e5030312a226de87545ea3000ce38
             })
 
         return Response(json.dumps(student_list), content_type='application/json')
@@ -47,7 +54,11 @@ class StudentController(http.Controller):
             'gender': student.gender,
             'birth_date': str(student.birth_date) if student.birth_date else None,
             'email': student.partner_id.email or None,
+<<<<<<< HEAD
             'phone': student.partner_id.phone or None,
+=======
+            'phone': student.partner_id.mobile or None,
+>>>>>>> 784ef3a1481e5030312a226de87545ea3000ce38
             'gr_no': student.gr_no or None,  # Registration Number
             'category': student.category_id.name if student.category_id else None,
             'image': student.partner_id.image_1920.decode() if student.partner_id.image_1920 else None,  # Base64 Image

@@ -174,3 +174,48 @@ class CourseController(http.Controller):
         }
 
         return request.make_response(json.dumps(response_data), headers={'Content-Type': 'application/json'})
+
+from odoo import http
+from odoo.http import request, Response
+import json
+
+
+class CourseController(http.Controller):
+
+    @http.route('/api/courses', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_courses(self, **kwargs):
+        """
+        Fetch the list of active courses.
+        Supports optional filtering by department.
+        """
+        try:
+            domain = [('active', '=', True)]
+
+            # Optional: Filter by department_id
+            department_id = kwargs.get('department_id')
+            if department_id:
+                try:
+                    department_id = int(department_id)
+                    domain.append(('department_id', '=', department_id))
+                except ValueError:
+                    return Response(json.dumps({'error': 'Invalid department_id. Must be an integer.'}),
+                                    content_type='application/json', status=400)
+
+            # Fetch courses with applied filters
+            courses = request.env['op.course'].sudo().search(domain)
+
+            # Format course data
+            course_data = [{
+                'id': course.id,
+                'name': course.name,
+                'code': course.code,
+                'evaluation_type': course.evaluation_type,
+                'department': course.department_id.name if course.department_id else None
+            } for course in courses]
+
+            return Response(json.dumps({'status': 'success', 'courses': course_data}),
+                            content_type='application/json', status=200)
+
+        except Exception as e:
+            return Response(json.dumps({'status': 'error', 'message': str(e)}),
+                            content_type='application/json', status=500)

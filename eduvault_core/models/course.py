@@ -38,3 +38,4 @@ class OpCourse(models.Model):
             'label': _('Import Template for Courses'),
             'template': '/eduvault_core/static/xls/op_course.xls'
         }]
+

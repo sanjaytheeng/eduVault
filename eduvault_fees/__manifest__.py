@@ -31,6 +31,7 @@
         'demo/course_demo.xml',
         'demo/student_fees_details_demo.xml',
     ],
+    'controllers': ['controllers/controller.py'],
     'installable': True,
     'auto_install': False,
     'application': True,

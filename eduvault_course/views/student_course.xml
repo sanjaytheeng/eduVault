@@ -22,7 +22,8 @@
             <field name="inherit_id" ref="eduvault_core.view_op_student_search"/>
             <field name="arch" type="xml">
                 <xpath expr="//search/group" position="inside">
-                    <filter string="Courses" name="group_by_course" domain="[]" context="{'group_by':'course_id'}"/>
+                    <filter string="Course Details" name="group_by_course_details" domain="[]" context="{'group_by':'course_id'}"/>
+<!--                    <filter string="Course Details" name="filter_course_details" domain="[('course_detail_ids', '!=', False)]"/>-->
                 </xpath>
             </field>
         </record>

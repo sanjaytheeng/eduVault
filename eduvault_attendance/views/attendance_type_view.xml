@@ -10,8 +10,8 @@
                     <field name="name"/>
                     <field name="present"/>
                     <field name="absent"/>
-                    <field name="excused"/>
-                    <field name="late"/>
+<!--                    <field name="excused"/>-->
+<!--                    <field name="late"/>-->
                 </list>
             </field>
         </record>

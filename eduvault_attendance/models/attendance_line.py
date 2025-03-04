@@ -16,7 +16,7 @@ class OpAttendanceLine(models.Model):
         'Present', default=True, tracking=True)
     excused = fields.Boolean(
         'Absent Excused', tracking=True)
-    absent = fields.Boolean('Absent Unexcused', tracking=True)
+    absent = fields.Boolean('Absent', tracking=True)
     late = fields.Boolean('Late', tracking=True)
     course_id = fields.Many2one(
         'op.course', 'Course',

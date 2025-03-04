@@ -5,6 +5,7 @@ from odoo.http import request, Response
 
 _logger = logging.getLogger(__name__)
 
+
 class FacultyController(http.Controller):
 
     @http.route('/api/faculty', type='http', auth='public', methods=['GET'], csrf=False)
@@ -75,3 +76,41 @@ class FacultyController(http.Controller):
         except Exception as e:
             return Response(json.dumps({'status': 'error', 'message': str(e)}),
                             content_type='application/json', status=500)
+
+    class FacultyController(http.Controller):
+
+        @http.route('/api/faculty/<int:faculty_id>/timetable', type='http', auth='public', methods=['GET'],
+                    csrf=False)
+        def get_faculty_timetable(self, faculty_id, **kwargs):
+            """
+            Fetch the timetable for a specific faculty member by ID.
+            """
+            try:
+                faculty = request.env['op.faculty'].sudo().browse(faculty_id)
+
+                if not faculty.exists():
+                    return Response(json.dumps({'error': 'Faculty not found'}), content_type='application/json',
+                                    status=404)
+
+                # Fetch the sessions associated with the faculty
+                sessions = request.env['op.session'].sudo().search([('faculty_id', '=', faculty_id)])
+
+                timetable_data = [{
+                    'session_id': session.id,
+                    'course': session.course_id.name,
+                    'subject': session.subject_id.name,
+                    'start_time': session.start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+                    'end_time': session.end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+                    'classroom_id': {
+                        'id': session.classroom_id.id,
+                        'name': session.classroom_id.name
+                    }
+                } for session in sessions]
+
+                return Response(json.dumps({'status': 'success', 'timetable': timetable_data}),
+                                content_type='application/json', status=200)
+
+            except Exception as e:
+                _logger.error("Error fetching timetable: %s", str(e))
+                return Response(json.dumps({'status': 'error', 'message': str(e)}),
+                                content_type='application/json', status=500)

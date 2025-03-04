@@ -1,5 +1,7 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo import models, fields, api
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class OpResultLine(models.Model):
     _name = "op.result.line"
@@ -17,12 +19,6 @@ class OpResultLine(models.Model):
     status = fields.Selection([('pass', 'Pass'), ('fail', 'Fail')], 'Status',
                               compute='_compute_status', store=True)
 
-    @api.constrains('marks', 'marks')
-    def _check_marks(self):
-        for record in self:
-            if record.marks < 0.0:
-                raise ValidationError(_("Enter proper Marks or Percentage!"))
-
     @api.depends('marks')
     def _compute_grade(self):
         for record in self:
@@ -31,24 +27,14 @@ class OpResultLine(models.Model):
                     result_template_id.grade_ids
                 if grades:
                     for grade in grades:
-                        if grade.min_per <= record.marks and \
-                                grade.max_per >= record.marks:
+                        if grade.min_per <= record.marks <= grade.max_per:
                             record.grade = grade.result
+                            break
+                    else:
+                        _logger.warning("No grade found for marks: %s", record.marks)
+                        record.grade = None
                 else:
+                    _logger.warning("No grades available for evaluation type 'grade'")
                     record.grade = None
             else:
                 record.grade = None
-
-    @api.depends('marks')
-    def _compute_status(self):
-        for record in self:
-            record.status = 'pass'
-            if record.marks < record.exam_id.min_marks:
-                record.status = 'fail'
-            else:
-                record.status = 'pass'
-
-    def unlink(self):
-        for res in self:
-            super(OpResultLine, res).unlink()
-        return self

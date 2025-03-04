@@ -62,8 +62,8 @@
                                     <field name="student_id"
                                            domain="[('course_detail_ids.course_id','=',parent.course_id),('course_detail_ids.batch_id','=',parent.batch_id)]"/>
                                     <field name="present"/>
-                                    <field name="late"/>
-                                    <field name="excused"/>
+<!--                                    <field name="late"/>-->
+<!--                                    <field name="excused"/>-->
                                     <field name="absent"/>
                                     <field name="remark"/>
                                 </list>

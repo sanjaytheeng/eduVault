@@ -153,4 +153,79 @@ class HREmployee(models.Model):
             # Link Faculty to Employee
             employee.faculty_id = faculty.id
 
+from odoo import http
+from odoo.http import request, Response
+import json
+
+
+class FacultyController(http.Controller):
+
+    @http.route('/api/faculties', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_faculties(self, **kwargs):
+        """
+        Fetch a list of active faculties.
+        Supports optional filtering by department.
+        """
+        try:
+            domain = [('active', '=', True)]
+
+            # Optional: Filter by department_id
+            department_id = kwargs.get('department_id')
+            if department_id:
+                try:
+                    department_id = int(department_id)
+                    domain.append(('main_department_id', '=', department_id))
+                except ValueError:
+                    return Response(json.dumps({'error': 'Invalid department_id. Must be an integer.'}),
+                                    content_type='application/json', status=400)
+
+            # Fetch faculty records
+            faculties = request.env['op.faculty'].sudo().search(domain)
+
+            faculty_data = [{
+                'id': faculty.id,
+                'name': f"{faculty.first_name} {faculty.middle_name or ''} {faculty.last_name}".strip(),
+                'gender': faculty.gender,
+                'birth_date': faculty.birth_date.strftime('%Y-%m-%d') if faculty.birth_date else None,
+                'email': faculty.partner_id.email,
+                'phone': faculty.partner_id.phone,
+                'department': faculty.main_department_id.name if faculty.main_department_id else None,
+                'subjects': [subject.name for subject in faculty.faculty_subject_ids]
+            } for faculty in faculties]
+
+            return Response(json.dumps({'status': 'success', 'faculties': faculty_data}),
+                            content_type='application/json', status=200)
+
+        except Exception as e:
+            return Response(json.dumps({'status': 'error', 'message': str(e)}),
+                            content_type='application/json', status=500)
+
+    @http.route('/api/faculty/<int:faculty_id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_faculty_details(self, faculty_id, **kwargs):
+        """
+        Fetch details of a specific faculty member by ID.
+        """
+        try:
+            faculty = request.env['op.faculty'].sudo().browse(faculty_id)
+
+            if not faculty.exists():
+                return Response(json.dumps({'error': 'Faculty not found'}), content_type='application/json', status=404)
+
+            faculty_data = {
+                'id': faculty.id,
+                'name': f"{faculty.first_name} {faculty.middle_name or ''} {faculty.last_name}".strip(),
+                'gender': faculty.gender,
+                'birth_date': faculty.birth_date.strftime('%Y-%m-%d') if faculty.birth_date else None,
+                'email': faculty.partner_id.email,
+                'phone': faculty.partner_id.phone,
+                'department': faculty.main_department_id.name if faculty.main_department_id else None,
+                'subjects': [subject.name for subject in faculty.faculty_subject_ids]
+            }
+
+            return Response(json.dumps({'status': 'success', 'faculty': faculty_data}),
+                            content_type='application/json', status=200)
+
+        except Exception as e:
+            return Response(json.dumps({'status': 'error', 'message': str(e)}),
+                            content_type='application/json', status=500)
 

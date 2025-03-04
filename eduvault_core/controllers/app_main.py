@@ -175,11 +175,6 @@ class CourseController(http.Controller):
 
         return request.make_response(json.dumps(response_data), headers={'Content-Type': 'application/json'})
 
-from odoo import http
-from odoo.http import request, Response
-import json
-
-
 class CourseController(http.Controller):
 
     @http.route('/api/courses', type='http', auth='public', methods=['GET'], csrf=False)
@@ -219,3 +214,4 @@ class CourseController(http.Controller):
         except Exception as e:
             return Response(json.dumps({'status': 'error', 'message': str(e)}),
                             content_type='application/json', status=500)
+

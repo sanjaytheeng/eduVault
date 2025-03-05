@@ -61,6 +61,7 @@ class AttendanceController(http.Controller):
 
             response_data = [{
                 'attendance_sheet_id': sheet.id,
+                'register_id' : sheet.register_id.name,
                 'attendance_date': sheet.attendance_date.strftime('%Y-%m-%d') if sheet.attendance_date else None
             } for sheet in attendance_sheets]
 

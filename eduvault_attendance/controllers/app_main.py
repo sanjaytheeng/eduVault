@@ -1,6 +1,9 @@
+import logging
 from odoo import http
 from odoo.http import request
 import json
+
+_logger = logging.getLogger(__name__)
 
 class StudentAttendanceController(http.Controller):
 
@@ -16,7 +19,8 @@ class StudentAttendanceController(http.Controller):
                 return request.make_response(json.dumps({'error': 'Attendance sheet not found'}),
                                              headers={'Content-Type': 'application/json'}, status=404)
 
-            attendance_lines = request.env['op.attendance.line'].sudo().search([('attendance_id', '=', attendance_sheet_id)])
+            attendance_lines = request.env['op.attendance.line'].sudo().search(
+                [('attendance_id', '=', attendance_sheet_id)])
 
             attendance_data = [{
                 'student_id': line.student_id.id,
@@ -29,7 +33,8 @@ class StudentAttendanceController(http.Controller):
 
             response_data = {
                 'attendance_sheet_id': attendance_sheet.id,
-                'attendance_date': attendance_sheet.attendance_date.strftime('%Y-%m-%d') if attendance_sheet.attendance_date else None,
+                'attendance_date': attendance_sheet.attendance_date.strftime(
+                    '%Y-%m-%d') if attendance_sheet.attendance_date else None,
                 'attendance_records': attendance_data,
             }
 
@@ -38,4 +43,31 @@ class StudentAttendanceController(http.Controller):
         except Exception as e:
             _logger.error("Error fetching attendance sheet: %s", str(e))
             return request.make_response(json.dumps({'status': 'error', 'message': str(e)}),
+                                         headers={'Content-Type': 'application/json'}, status=500)
+
+class AttendanceController(http.Controller):
+
+    @http.route('/api/attendance_sheets', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_all_attendance_sheets(self, **kwargs):
+        """
+        Fetch all attendance sheets.
+        """
+        try:
+            attendance_sheets = request.env['op.attendance.sheet'].sudo().search([])
+
+            if not attendance_sheets:
+                return request.make_response(json.dumps({'error': 'No attendance sheets found'}),
+                                             headers={'Content-Type': 'application/json'}, status=404)
+
+            response_data = [{
+                'attendance_sheet_id': sheet.id,
+                'attendance_date': sheet.attendance_date.strftime('%Y-%m-%d') if sheet.attendance_date else None
+            } for sheet in attendance_sheets]
+
+            return request.make_response(json.dumps(response_data),
+                                         headers={'Content-Type': 'application/json'})
+
+        except Exception as e:
+            _logger.error("Error fetching attendance sheets: %s", str(e))
+            return request.make_response(json.dumps({'status': 'error', 'message': 'Internal server error'}),
                                          headers={'Content-Type': 'application/json'}, status=500)

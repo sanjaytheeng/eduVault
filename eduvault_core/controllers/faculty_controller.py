@@ -77,7 +77,7 @@ class FacultyController(http.Controller):
             return Response(json.dumps({'status': 'error', 'message': str(e)}),
                             content_type='application/json', status=500)
 
-    class FacultyController(http.Controller):
+    class FacultyTimetableController(http.Controller):
 
         @http.route('/api/faculty/<int:faculty_id>/timetable', type='http', auth='public', methods=['GET'],
                     csrf=False)
@@ -107,10 +107,15 @@ class FacultyController(http.Controller):
                     }
                 } for session in sessions]
 
-                return Response(json.dumps({'status': 'success', 'timetable': timetable_data}),
-                                content_type='application/json', status=200)
+                response_data = {
+                    'status': 'success',
+                    'faculty_name': f"{faculty.first_name} {faculty.middle_name or ''} {faculty.last_name}".strip(),
+                    'timetable': timetable_data
+                }
+
+                return Response(json.dumps(response_data), content_type='application/json', status=200)
 
             except Exception as e:
                 _logger.error("Error fetching timetable: %s", str(e))
-                return Response(json.dumps({'status': 'error', 'message': str(e)}),
-                                content_type='application/json', status=500)
+                return Response(json.dumps({'status': 'error', 'message': str(e)}), content_type='application/json',
+                                status=500)

@@ -46,10 +46,10 @@ class CourseController(http.Controller):
 
     @http.route('/api/courses', type='http', auth='public', methods=['GET'], csrf=False)
     def get_courses(self, **kwargs):
-        """
-        Fetch the list of active courses.
-        Supports optional filtering by department.
-        """
+        # \"\"\"
+        # Fetch the list of active courses with related subjects.
+        # Supports optional filtering by department.
+        # \"\"\"
         try:
             domain = [('active', '=', True)]
 
@@ -66,14 +66,25 @@ class CourseController(http.Controller):
             # Fetch courses with applied filters
             courses = request.env['op.course'].sudo().search(domain)
 
-            # Format course data
-            course_data = [{
-                'id': course.id,
-                'name': course.name,
-                'code': course.code,
-                'evaluation_type': course.evaluation_type,
-                'department': course.department_id.name if course.department_id else None
-            } for course in courses]
+            # Format course data with subjects
+            course_data = []
+            for course in courses:
+                subject_data = []
+                for subject in course.subject_ids:
+                    subject_data.append({
+                        'subject_id': subject.id,
+                        'name': subject.name,
+                        'code': subject.code,
+                    })
+
+                course_data.append({
+                    'id': course.id,
+                    'name': course.name,
+                    'code': course.code,
+                    'evaluation_type': course.evaluation_type,
+                    'department': course.department_id.name if course.department_id else None,
+                    'subjects': subject_data,  # Include subjects data here
+                })
 
             return Response(json.dumps({'status': 'success', 'courses': course_data}),
                             content_type='application/json', status=200)

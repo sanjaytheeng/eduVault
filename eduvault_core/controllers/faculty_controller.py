@@ -2,6 +2,7 @@ import json
 import logging
 from odoo import http
 from odoo.http import request, Response
+import base64
 
 _logger = logging.getLogger(__name__)
 
@@ -38,7 +39,8 @@ class FacultyController(http.Controller):
                 'email': faculty.partner_id.email,
                 'phone': faculty.partner_id.phone,
                 'department': faculty.main_department_id.name if faculty.main_department_id else None,
-                'subjects': [subject.name for subject in faculty.faculty_subject_ids]
+                'subjects': [subject.name for subject in faculty.faculty_subject_ids],
+                'image_url': f"/api/faculty/image/{faculty.id}" if faculty.partner_id.image_1920 else None,
             } for faculty in faculties]
 
             return Response(json.dumps({'status': 'success', 'faculties': faculty_data}),
@@ -67,7 +69,8 @@ class FacultyController(http.Controller):
                 'email': faculty.partner_id.email,
                 'phone': faculty.partner_id.phone,
                 'department': faculty.main_department_id.name if faculty.main_department_id else None,
-                'subjects': [subject.name for subject in faculty.faculty_subject_ids]
+                'subjects': [subject.name for subject in faculty.faculty_subject_ids],
+                'image_url': f"/api/faculty/image/{faculty.id}" if faculty.partner_id.image_1920 else None,
             }
 
             return Response(json.dumps({'status': 'success', 'faculty': faculty_data}),
@@ -76,6 +79,16 @@ class FacultyController(http.Controller):
         except Exception as e:
             return Response(json.dumps({'status': 'error', 'message': str(e)}),
                             content_type='application/json', status=500)
+
+    @http.route('/api/faculty/image/<int:faculty_id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_faculty_image(self, faculty_id):
+        faculty = request.env['op.faculty'].browse(faculty_id)
+
+        if not faculty.exists() or not faculty.partner_id.image_1920:
+            return Response(json.dumps({'error': 'Image not found'}), content_type='application/json', status=404)
+
+        image_data = base64.b64decode(faculty.partner_id.image_1920)
+        return Response(image_data, content_type='image/png')  # Change format if needed
 
     class FacultyTimetableController(http.Controller):
 

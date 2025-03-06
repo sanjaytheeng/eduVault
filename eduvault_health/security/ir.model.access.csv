@@ -3,3 +3,5 @@
 "access_op_health_faculty","op.health.faculty.access","model_op_health","eduvault_core.group_op_faculty",1,0,0,0
 "access_op_health_back_office","op.health.back_office.access","model_op_health","eduvault_core.group_op_back_office",1,1,1,1
 "access_op_health_back_office_admin","op.health.back_office_admin.access","model_op_health","eduvault_core.group_op_back_office_admin",1,1,1,1
+"access_op_health_line_user","op.health.line user access","model_op_health_line","base.group_user",1,1,1,1
+"access_op_health_line_manager","op.health.line manager access","model_op_health_line","base.group_system",1,1,1,1

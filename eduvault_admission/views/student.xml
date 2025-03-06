@@ -1,16 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_op_student_form_inherit_application_number" model="ir.ui.view">
-    <field name="name">op.student.form.inherit.application.number</field>
-    <field name="model">op.student</field>
-    <field name="inherit_id" ref="eduvault_core.view_op_student_form"/>
-    <field name="arch" type="xml">
-        <group position="inside">
-            <field name="application_number" readonly="1"/>
-        </group>
-    </field>
-</record>
+        <record id="view_op_student_form_inherit" model="ir.ui.view">
+            <field name="name">op.student.form.inherit</field>
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="eduvault_core.view_op_student_form"/>  <!-- Inherit the existing form -->
+            <field name="arch" type="xml">
+                <!-- Add a new page inside the existing notebook -->
+                <xpath expr="//form/sheet/notebook" position="inside">
+                    <page name="course_information" string="Courses">
+                        <group>
+                            <field name="course_id" />
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
-
-

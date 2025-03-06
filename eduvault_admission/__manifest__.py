@@ -10,7 +10,8 @@
     'website': 'https://www.eduvault.org',
     'depends': [
         'eduvault_core',
-        'eduvault_fees'
+        'eduvault_fees',
+        'eduvault_core',
     ],
     'data': [
         'security/op_admission_security.xml',
@@ -19,6 +20,7 @@
         'data/parameter_data.xml',
         'views/admission_register_view.xml',
         'views/admission_view.xml',
+        'views/student.xml',
         # 'views/student.xml',
         'report/report_admission_analysis.xml',
         'report/report_menu.xml',

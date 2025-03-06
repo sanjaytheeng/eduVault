@@ -268,7 +268,6 @@ class OpAdmission(models.Model):
                     record.student_id = student_id = self.env[
                         'op.student'].create(vals).id
                     record.partner_id = record.student_id.partner_id.id if record else False
-
             else:
                 student_id = record.student_id.id
                 record.student_id.write({
@@ -336,6 +335,10 @@ class OpAdmission(models.Model):
                 'state': 'draft',
             })
             reg_id.get_subjects()
+            # Update the course_id in the student record
+            record.student_id.write({
+                'course_id': record.course_id.id
+            })
 
     def confirm_rejected(self):
         self.state = 'reject'
@@ -456,6 +459,16 @@ class ResConfigSettings(models.TransientModel):
 class OpStudent(models.Model):
     _inherit = "op.student"
 
-    application_number = fields.Char(
-        'Application Number', size=16, copy=False,
-        readonly=True, store=True)
+    course_id = fields.Many2one('op.course', 'Course', readonly=True)
+
+    @api.model
+    def update_existing_course_ids(self):
+        admissions = self.env['op.admission'].search([('state', '=', 'done')])
+        for admission in admissions:
+            if admission.student_id:
+                admission.student_id.write({
+                    'course_id': admission.course_id.id
+                })
+
+
+

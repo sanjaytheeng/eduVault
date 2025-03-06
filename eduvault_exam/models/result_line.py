@@ -38,3 +38,11 @@ class OpResultLine(models.Model):
                     record.grade = None
             else:
                 record.grade = None
+
+    @api.depends('marks')
+    def _compute_status(self):
+        for record in self:
+            if record.marks >= 50:  # Assuming 50 is the passing mark
+                record.status = 'pass'
+            else:
+                record.status = 'fail'

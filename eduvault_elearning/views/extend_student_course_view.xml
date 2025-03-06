@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_student_form_extend" model="ir.ui.view">
+            <field name="name">op.student.form.extend</field>
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="eduvault_admission.view_op_student_form_inherit"/>  <!-- Inherit the existing form -->
+            <field name="arch" type="xml">
+                <!-- Add the new fields inside the course_information page -->
+                <xpath expr="//page[@name='course_information']/group" position="inside">
+                    <group>
+                        <field name="elearning_course_ids" />
+                        <field name="elearning_tag_ids" widget="many2many_tags"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

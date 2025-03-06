@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <!-- Inherit and extend the op.course tree view (list view) to add the new fields -->
         <record id="view_op_course_tree_inherit" model="ir.ui.view">
+            <field name="name">op.course.list.inherit</field>
+            <field name="model">op.course</field>
+            <field name="inherit_id" ref="eduvault_core.view_op_course_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="inside">
+                    <field name="elearning_course_ids"/>  <!-- Updated field name -->
+                    <field name="elearning_tag_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit and extend the op.course form view to add the new fields -->
+        <record id="view_op_course_form_inherit" model="ir.ui.view">
             <field name="name">op.course.form.inherit</field>
             <field name="model">op.course</field>
-            <field name="inherit_id" ref="eduvault_core.view_op_course_form"/> <!-- reference the original tree view -->
+            <field name="inherit_id" ref="eduvault_core.view_op_course_form"/>
             <field name="arch" type="xml">
-               <xpath expr="//group[@class='course_info']" position="after">
-                    <group>
-                        <field name="elearning_course_id"/>
+                <xpath expr="//notebook" position="after">
+                    <group string="E-Learning">
                         <field name="elearning_tag_ids" widget="many2many_tags"/>
+                        <field name="elearning_course_ids"/>  <!-- Updated field name -->
                     </group>
                 </xpath>
             </field>

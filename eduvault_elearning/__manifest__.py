@@ -1,20 +1,19 @@
+# -*- coding: utf-8 -*-
 {
-    'name': 'eduvault eLearning',
-    'version': '18.0.1.0',
-    'license': 'LGPL-3',
+    'name': "eduvault_elearning",
+
+    'summary': "elearning integration",
+    'description': """
+Long description of module's purpose
+    """,
+
+    'author': "Pranish Lama",
     'category': 'eduvault',
-    "sequence": 3,
-    'summary': 'Manage eLearning courses of students',
-    'complexity': "easy",
-    'author': 'eduvault Inc',
-    'depends': [
-        'eduvault_core',
-        'eduvault_fees',
-        'eduvault_core',
-    ],
+    'version': '0.1',
+    'depends': ['base', 'website', 'website_slides', 'eduvault_core', 'eduvault_admission'],
     'data': [
         'views/extend_course_view.xml',
+        'views/extend_student_course_view.xml',
     ],
-    'installable': True,
-    'auto_install': False,
 }
+

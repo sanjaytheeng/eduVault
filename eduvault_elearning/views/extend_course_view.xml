@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_course_tree_inherit" model="ir.ui.view">
+            <field name="name">op.course.form.inherit</field>
+            <field name="model">op.course</field>
+            <field name="inherit_id" ref="eduvault_core.view_op_course_form"/> <!-- reference the original tree view -->
+            <field name="arch" type="xml">
+               <xpath expr="//group[@class='course_info']" position="after">
+                    <group>
+                        <field name="elearning_course_id"/>
+                        <field name="elearning_tag_ids" widget="many2many_tags"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
